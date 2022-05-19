@@ -27,21 +27,25 @@
          </div>
 
          <div class="detentions__form-container">
-            <label class="form__label" for="division"> Подразделение:
-               <select class="form__select" name="division">
-                  @if(old('division'))
-                     <option value="{{ old('division') }}">{{ $division->find(old('division'))->title }}</option>
-                  @else
-                     <option class="form__option" value="title" disabled selected>Выберите подразделение</option>
-                  @endif
-                  @foreach( $division as $div)
-                     <option value="{{ $div->id }}"> {{ $div->title }} </option>
-                  @endforeach
-               </select>
-               @error('division')
-               <span class="error">*{{ $message }}</span>
-               @enderror
-            </label>
+            @if(auth()->user()->role)
+               <label class="form__label" for="division"> Подразделение:
+                  <select class="form__select" name="division">
+                     @if(old('division'))
+                        <option value="{{ old('division') }}">{{ $division->find(old('division'))->title }}</option>
+                     @else
+                        <option class="form__option" value="title" disabled selected>Выберите подразделение</option>
+                     @endif
+                     @foreach( $division as $div)
+                        <option value="{{ $div->id }}"> {{ $div->title }} </option>
+                     @endforeach
+                  </select>
+                  @error('division')
+                  <span class="error">*{{ $message }}</span>
+                  @enderror
+               </label>
+            @else
+               <input type="text" name="division" id="division" value="{{auth()->user()->division_id}}" hidden>
+            @endif
 
             <label class="form__label" for="type"> Вид задержания:
                <select onchange="noteSelect(this)" class="form__select" name="type" id="typeSelect">

@@ -35,7 +35,7 @@ class DetentionController extends Controller
    public function create() {
       $type = Type::all();
       $note = Note::all();
-      return view('detention.createDetention', compact( 'type', 'note'));
+      return view('detention.createDetention', compact('type', 'note'));
    }
 
    /**
@@ -45,7 +45,6 @@ class DetentionController extends Controller
     * @return Response
     */
    public function store(Request $request) {
-
       $validationRules = [
          'kusp' => 'nullable|numeric',
          'date' => 'required',
