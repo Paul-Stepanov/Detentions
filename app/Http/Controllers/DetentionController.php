@@ -20,7 +20,10 @@ class DetentionController extends Controller
     * @return Response
     */
    public function index() {
-      $detention = Detention::query()->orderByDesc('date') ->paginate(5);
+      auth()->user()->role ?
+         $detention = Detention::query()->orderByDesc('date')->paginate(5) :
+         $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(5);
+
       return view('detention.detentions', compact('detention'));
    }
 
@@ -30,10 +33,9 @@ class DetentionController extends Controller
     * @return Response
     */
    public function create() {
-      $division = Division::all();
       $type = Type::all();
       $note = Note::all();
-      return view('detention.createDetention', compact('division', 'type', 'note'));
+      return view('detention.createDetention', compact( 'type', 'note'));
    }
 
    /**
@@ -152,7 +154,7 @@ class DetentionController extends Controller
    }
 
    public function import() {
-      Excel::import(new DetentionsImport(),'detentionsImport.xlsx');
+      Excel::import(new DetentionsImport(), 'detentionsImport.xlsx');
       return redirect()->route('detention.index');
    }
 }

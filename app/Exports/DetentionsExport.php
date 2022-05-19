@@ -9,9 +9,11 @@ use Maatwebsite\Excel\Concerns\FromView;
 class DetentionsExport implements FromView
 {
    public function view(): View {
-      return view('detention.exportDetentions', [
-         'detentions' => Detention::all()
-      ]);
+      auth()->user()->role ?
+         $detentions = Detention::all() :
+         $detentions = Detention::query()->where('division_id', auth()->user()->division_id)->get();
+
+      return view('detention.exportDetentions', compact('detentions'));
    }
 }
 
