@@ -21,8 +21,8 @@ class DetentionController extends Controller
     */
    public function index() {
       auth()->user()->role ?
-         $detention = Detention::query()->orderByDesc('date')->paginate(5) :
-         $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(5);
+         $detention = Detention::query()->orderByDesc('date')->paginate(10) :
+         $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(10);
 
       return view('detention.detentions', compact('detention'));
    }

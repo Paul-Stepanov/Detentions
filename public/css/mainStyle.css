@@ -103,10 +103,11 @@ h6 {
   color: white;
   font-weight: 300;
   padding: 10px;
+  transition: all 200ms linear;
 }
 .button a:hover {
   text-shadow: 0 0 5px white;
-  transition: all 300ms;
+  transition: all 300ms linear;
 }
 .button:hover {
   box-shadow: 0 4px rgba(191, 195, 201, 0.7), inset 0 5px 5px rgba(255, 255, 255, 0.4);
@@ -174,6 +175,19 @@ h6 {
 }
 .button__edit-simple:hover {
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+.button__logout {
+  padding: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-weight: 900;
+  transition: all 250ms linear;
+}
+.button__logout a:hover {
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.75);
+}
+.button__logout:hover {
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  transition: all 250ms linear;
 }
 
 .form {
@@ -258,11 +272,11 @@ h6 {
   margin-top: 5px;
   font-family: Comfortaa, serif;
   font-size: calc(0.96vw + 2px);
+  background-color: rgba(20, 33, 61, 0.9);
 }
 .header__nav {
   height: 100%;
   align-self: center;
-  background-color: rgba(20, 33, 61, 0.9);
   border-radius: 20px;
 }
 .header__logo {
@@ -297,13 +311,24 @@ h6 {
   align-items: center;
 }
 .nav__menu-item {
-  padding: 10px;
+  padding: 5px;
   margin: 5px;
   text-align: center;
   border-radius: 5px;
 }
+.nav__menu-item-link {
+  text-align: center;
+  transition: all 200ms linear;
+}
 .nav__menu-item-link:hover {
   text-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+  transition: all 300ms;
+}
+.nav__menu-item-link--username {
+  font-weight: 500;
+}
+.nav__menu-item-link--username:hover {
+  text-shadow: rgba(253, 85, 47, 0.85) 0 0 10px;
   transition: all 300ms;
 }
 .nav__menu-item--search {
