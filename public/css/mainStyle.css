@@ -267,7 +267,6 @@ h6 {
   overflow: hidden;
   height: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 5px;
   font-family: Comfortaa, serif;
@@ -275,7 +274,6 @@ h6 {
   background-color: rgba(20, 33, 61, 0.9);
 }
 .header__nav {
-  height: 100%;
   align-self: center;
   border-radius: 20px;
 }
@@ -326,6 +324,9 @@ h6 {
 }
 .nav__menu-item-link--username {
   font-weight: 500;
+  flex-grow: 1;
+  text-align: left;
+  padding: 10px;
 }
 .nav__menu-item-link--username:hover {
   text-shadow: rgba(253, 85, 47, 0.85) 0 0 10px;
