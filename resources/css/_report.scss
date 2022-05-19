@@ -1,0 +1,210 @@
+.report {
+
+   &__menu-wrapper {
+      position: relative;
+      display: inline-block;
+   }
+
+   &__menu-link {
+      white-space: nowrap;
+      z-index: 50;
+      border: $background-button-secondary-color 1px solid;
+      border-radius: 20px;
+      background-color: rgba(160, 174, 192, 0.25);
+      opacity: 1;
+      transition: opacity 200ms linear;
+
+      &--hide {
+         visibility: hidden;
+         opacity: 0;
+         border-radius: 20px;
+         position: absolute;
+         top: 0;
+         left: 0;
+         transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out 400ms, top 300ms ease-in-out, left 300ms ease-in-out;
+      }
+   }
+
+   &__type-container {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+   }
+
+   &__type-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      //align-items: flex-start;
+      align-items: center;
+
+      &-label {
+         font-size: 16px;
+         margin-bottom: 5px;
+      }
+
+      &-input {
+         border-radius: 3px;
+         margin-bottom: 10px;
+         width: 200px;
+         height: 30px;
+         font-size: 16px;
+         padding: 5px;
+      }
+
+      &-btn {
+         padding: 5px;
+         width: 200px;
+      }
+   }
+}
+
+.type-report-btn {
+   position: absolute;
+   top: -55px;
+   left: 70px;
+   width: 70px;
+   transition: top 250ms ease-in-out, left 250ms ease-in-out;
+}
+
+.division-report-btn {
+   position: absolute;
+   top: 0;
+   left: 170px;
+   width: 160px;
+   white-space: nowrap;
+   transition: left 300ms ease-in-out;
+
+}
+
+.advanced-report-btn {
+   position: absolute;
+   top: -50px;
+   left: 155px;
+   width: 110px;
+   transition: top 250ms ease-in-out, left 250ms ease-in-out;
+
+}
+
+
+.report-type {
+
+   // .report-type__card
+   &__card {
+      text-align: center;
+      display: grid;
+      grid-template-columns: 27% repeat(12, 1fr) 6%;
+
+   }
+
+   // .report-type__title
+   &__title {
+      width: 100%;
+      padding: 10px;
+      grid-column: 1/15;
+      justify-self: center;
+      align-self: center;
+      font-family: Comfortaa, serif;
+      font-weight: 900;
+   }
+
+   // .report-type__subtitle
+   &__subtitle {
+      padding: 10px;
+      background-color: $background-button-main-color;
+
+   }
+
+   // .report-type__item
+   &__item {
+      padding: 5px;
+      //.report-type__item--left-text
+      &--left-text {
+         text-align: start;
+      }
+
+      //.report-type__item--total
+      &--total {
+         background-color: $background-third-color;
+      }
+   }
+
+   // .report-type__total
+   &__total {
+      padding: 10px;
+      font-weight: 700;
+      background-color: $background-third-color;
+   }
+
+   // .report-type__btn
+   &__btn {
+      align-self: flex-start;
+      margin-top: 10px;
+   }
+}
+
+[class*="report-type"] {
+   border: 1px solid $font-secondary-color;
+}
+
+[class*="report-division"] {
+   border: 1px solid $font-secondary-color;
+}
+
+.report {
+   // .report__division-container
+   &__division-container {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+   }
+}
+
+.report-division {
+   // .report-division__table
+   &__table {
+      text-align: center;
+      margin-bottom: 10px;
+   }
+
+   &__title{
+      padding: 5px;
+      font-weight: 700;
+      font-family: Comfortaa, sans-serif;
+   }
+
+   // .report-division__subtitle
+   &__subtitle {
+      background-color: $background-button-main-color;
+      font-weight: 700;
+      &--column-name{
+         writing-mode: vertical-lr;
+         text-align: center;
+      }
+   }
+
+   // .report-division__total
+   &__total {
+      background-color: $background-third-color;
+      font-weight: 700;
+   }
+
+   // .report-division__item
+   &__item {
+      &--left-text{
+         text-align: start;
+      }
+   }
+
+   // .report-division__btn
+   &__btn {
+      align-self: flex-start;
+   }
+
+}
+
+

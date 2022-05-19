@@ -1,0 +1,106 @@
+.header {
+   position: sticky;
+   top: -1px;
+   z-index: 20;
+   overflow: hidden;
+   height: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 5px;
+   font-family: Comfortaa, serif;
+   font-size: calc(0.96vw + 2px) ;
+
+   &__nav {
+      height: 100%;
+      align-self: center;
+      background-color: rgb(20, 33, 61, 0.9);
+      border-radius: 20px;
+   }
+
+   &__logo {
+
+      position: relative;
+      width: 60px;
+      height: 50px;
+
+      & img {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         object-fit: contain;
+      }
+   }
+
+   &__container {
+      width: 100%;
+      position: relative;
+
+      &:after {
+         content: '';
+         position: absolute;
+         top: 110%;
+         left: 0;
+         min-width: 100%;
+         border-top: 1px solid white;
+      }
+   }
+}
+
+.nav {
+   &__menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-item {
+         padding: 10px;
+         margin: 5px;
+         text-align: center;
+         border-radius: 5px;
+         //border-left: 1px solid rgba(255, 255, 255, 0);
+         //border-top: 1px solid rgba(255, 255, 255, 0);
+         //border-right: 1px solid rgba(255, 255, 255, 0);
+         //border-bottom: 1px solid rgba(255, 255, 255, 0);
+
+         &:hover {
+            //border-left: 1px solid rgba(255, 255, 255, 1);
+            //border-top: 1px solid rgba(255, 255, 255, 1);
+            //border-right: 1px solid rgba(255, 255, 255, 1);
+            //border-bottom: 1px solid rgba(255, 255, 255, 1);
+            //transition: border-left 0.1s ease-out 300ms, border-top 0.1s ease-in 900ms, border-right 0.1s ease-out 800ms, border-bottom 0.1s ease-out 600ms;
+         }
+
+         &-link {
+            &:hover {
+               text-shadow: rgba(255, 255, 255, 0.8) 0 0 10px;
+               transition: all 300ms;
+            }
+         }
+
+         &--search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(9vw + 2px);
+            padding: 5px 10px;
+            font-weight: 700;
+            border: white 1px solid;
+            border-radius: 20px;
+            background-color: rgba(226, 232, 240, 0.25);
+            transition: all 300ms ease-in-out;
+
+            & img {
+               width: 25px;
+            }
+            &:hover{
+               box-shadow: inset rgba(255,255,255,0.8) -3px -3px 10px;
+               transition: all 300ms ease-in-out;
+            }
+         }
+
+      }
+   }
+}

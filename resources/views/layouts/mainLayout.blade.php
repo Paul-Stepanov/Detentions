@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport"
+         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href={{ asset('css/mainStyle.css') }}>
+   <link rel="stylesheet" href={{ asset('fonts/roboto/roboto.css') }}>
+   <link rel="stylesheet" href={{ asset('fonts/comfortaa/comfortaa.css') }}>
+   <link rel="stylesheet" href={{ asset('fonts/lato/lato.css') }}>
+   <link rel="stylesheet" href={{ asset('fonts/opensans/opensans.css') }}>
+
+   <title>@yield('title')</title>
+</head>
+<body>
+
+<div class="background container">
+
+   @include('layouts.header')
+
+   <main class="main">
+      @yield('content')
+      @yield('search')
+   </main>
+
+   @include('layouts.footer')
+
+</div>
+
+</body>
+</html>

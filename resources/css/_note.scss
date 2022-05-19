@@ -1,0 +1,49 @@
+.note {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 650px;
+   margin: 0 auto;
+
+   &__create-page {
+
+      width: 550px;
+      margin: 0 auto;
+
+   }
+
+   &__body {
+
+      &-item {
+         padding: 5px;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+
+         & p {
+            justify-self: flex-start;
+            width: 100%;
+            margin-right: 10px;
+         }
+
+         & span{
+            margin-right: 10px;
+         }
+      }
+   }
+
+   &__button {
+
+      &-create {
+
+         margin-top: 20px;
+      }
+
+      &-back {
+
+         margin-top: 20px;
+
+      }
+   }
+}

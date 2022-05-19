@@ -1,0 +1,25 @@
+.footer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   // .footer__text
+   &__text {
+      padding: 15px;
+      font-size: 14px;
+      opacity: 80%
+   }
+
+   &__container {
+      width: 100%;
+      position: relative;
+
+      &:before {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         min-width: 100%;
+         border-top: 1px solid white;
+      }
+   }
+}

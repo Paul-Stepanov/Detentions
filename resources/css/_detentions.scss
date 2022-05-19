@@ -1,0 +1,121 @@
+
+.detentions { // сили таблицы отображающей задержания
+   margin-bottom: 10px;
+   box-shadow: 0 5px 10px 2px black;
+   border-radius: 3px;
+   overflow: hidden;
+
+   &__button-create { // кнопка создания новой записи задержания
+      margin-bottom: 20px;
+   }
+
+   // .detentions__card - стили одной целой строки записи таблицы
+   &__card {
+      position: relative;
+      width: 100%;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
+      grid-template-rows: auto;
+      grid-template-columns: 5% 7% 10% 9% 52% 8% 9%;
+      word-wrap: break-word;
+      white-space: normal;
+      background-color: rgba(107, 114, 128, 0.3);
+      font-size: 0.9vw;
+   }
+
+   // .detentions__card-item - стили одной ячейки таблицы
+   &__card-item {
+      cursor: pointer;
+      padding: 5px;
+      width: 100%;
+      height: 100%;
+      border: $font-secondary-color 1px solid;
+      text-align: center;
+      word-wrap: break-word;
+      white-space: normal;
+
+      &--left-text {
+         justify-self: start;
+         text-align: justify;
+      }
+
+
+      &:hover {
+         text-shadow: 0 0 5px white;
+      }
+   }
+
+   &__card-title { // стили заголовков таблицы задержаний
+      padding: 5px;
+      width: 100%;
+      height: 100%;
+      border: $font-secondary-color 1px solid;
+      text-align: center;
+      word-wrap: break-word;
+      white-space: normal;
+      font-weight: 700;
+      font-family: Comfortaa, serif;
+
+      & a {
+         font-family: Comfortaa, serif;
+      }
+   }
+
+   &__edit-block {
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      background: linear-gradient(0deg, rgba(37, 37, 66, 0.8) 80%, rgba(119, 121, 134, 0.32) 100%);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 500ms linear, visibility 300s linear 0ms;
+
+      &--hide {
+         opacity: 0;
+         visibility: hidden;
+         transition: opacity 400ms, visibility 0s linear 300ms;
+      }
+
+      position: absolute;
+
+      &-item {
+         margin: 0 5px;
+      }
+   }
+
+   &__create-page { // стили страницы создания записи задержания
+      max-width: 45%;
+      margin: 0 auto;
+   }
+
+   &__form-container { // стили формы создания записи задержания
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-column-gap: 10px;
+   }
+
+   &__note-select {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 500ms linear, visibility 300s linear 0ms;
+
+
+      &--hide {
+         opacity: 0;
+         visibility: hidden;
+         transition: opacity 300ms, visibility 0s linear 300ms;
+
+      }
+   }
+
+   &__form-button { // отступ кнопки НАЗАД в форме создания таблицы задержания
+      margin-top: 20px;
+   }
+
+}
