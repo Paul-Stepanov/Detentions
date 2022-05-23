@@ -11,7 +11,7 @@
             <li class="nav__menu-item"><a href="{{ route('detention.index') }}"
                                           class="nav__menu-item-link">Задержания</a>
             </li>
-            @if(auth()->user()->role)
+            @if(auth()->user()->role == 'admin')
 
             <li class="nav__menu-item"><a href="{{ route('division.index') }}" class="nav__menu-item-link">Список
                   подразделений</a></li>

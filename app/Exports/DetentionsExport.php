@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 class DetentionsExport implements FromView
 {
    public function view(): View {
-      auth()->user()->role ?
+      auth()->user()->role == 'admin' ?
          $detentions = Detention::all() :
          $detentions = Detention::query()->where('division_id', auth()->user()->division_id)->get();
 

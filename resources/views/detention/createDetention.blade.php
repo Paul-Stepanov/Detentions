@@ -25,9 +25,8 @@
                @enderror
             </label>
          </div>
-
          <div class="detentions__form-container">
-            @if(auth()->user()->role)
+            @if(auth()->user()->role == 'admin')
                <label class="form__label" for="division"> Подразделение:
                   <select class="form__select" name="division">
                      @if(old('division'))

@@ -34,15 +34,19 @@
             </div>
 
             <div class="search-window__form-container">
-               <label class="form__label" for="division"> Подразделение:
-                  <select class="form__select" name="division">
-                     <option class="form__option" value="title" disabled selected>Выберите подразделение</option>
-                     @foreach( $division as $div)
-                        <option value="{{ $div->id }}"> {{ $div->title }} </option>
-                     @endforeach
-                  </select>
-               </label>
-
+               @if(auth()->user()->role == 'admin' or auth()->user()->role =='moderator')
+                  <label class="form__label" for="division"> Подразделение:
+                     <select class="form__select" name="division">
+                        <option class="form__option" value="title" disabled selected>Выберите подразделение</option>
+                        @foreach( $division as $div)
+                           <option value="{{ $div->id }}"> {{ $div->title }} </option>
+                        @endforeach
+                     </select>
+                  </label>
+               @else
+                  <input type="text" name="division" id="division"
+                         value="{{ auth()->user()->division_id}}" hidden>
+               @endif
                <label class="form__label" for="type"> Вид задержания:
                   <select onchange="noteSelect(this)" class="form__select" name="type" id="typeSelect">
                      <option value="title" disabled selected>Выберите вид задержания</option>

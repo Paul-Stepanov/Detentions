@@ -20,7 +20,7 @@ class DetentionController extends Controller
     * @return Response
     */
    public function index() {
-      auth()->user()->role ?
+      auth()->user()->role == 'admin' ?
          $detention = Detention::query()->orderByDesc('date')->paginate(10) :
          $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(10);
 
