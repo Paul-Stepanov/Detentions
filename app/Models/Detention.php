@@ -17,6 +17,7 @@ class Detention extends Model
       'description',
       'note_id',
       'explanation',
+      'editing',
    ];
 
    protected $dates = ['date'];
@@ -33,4 +34,7 @@ class Detention extends Model
       return $this->belongsTo(Note::class);
    }
 
+   public function edit_detention() {
+      return $this->hasMany(EditDetention::class);
+   }
 }

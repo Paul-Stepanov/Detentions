@@ -122,8 +122,6 @@ class DetentionController extends Controller
       ];
       $request->validate($validationRules, $errorMessage);
 
-      dd($request->all(), $detention->getAttributes());
-
       $detention->update([
          'kusp' => $request->input('kusp'),
          'date' => $request->input('date'),
