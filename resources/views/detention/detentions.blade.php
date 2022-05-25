@@ -14,7 +14,8 @@
       Сформировать отчет
       <a class="report__menu-link report__menu-link--hide" id="typeReport" href="{{ route('report.showTypeReport') }}">по
          виду</a>
-      <a class="report__menu-link report__menu-link--hide" id="divisionReport" href="{{ route('report.showDivisionReport') }}">по подразделениям</a>
+      <a class="report__menu-link report__menu-link--hide" id="divisionReport"
+         href="{{ route('report.showDivisionReport') }}">по подразделениям</a>
       <a class="report__menu-link report__menu-link--hide" id="advancedReport" href="#">расширенный</a>
    </button>
 
@@ -172,7 +173,7 @@
    <a class="button" href="{{ route('detention.export') }}">Экспорт в Excel</a>
 
    {{--   Раскомментировать при необходимости импорта задержаний--}}
-      <a class="button" href="{{ route('detention.import') }}">Импорт из Excel</a>
+   <a class="button" href="{{ route('detention.import') }}">Импорт из Excel</a>
 
    <script src="{{asset('js/showReportMenu.js')}}"></script>
    <script src="{{asset('js/editDetentionMenu.js')}}"></script>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\DetentionsExport;
 use App\Imports\DetentionsImport;
 use App\Models\Detention;
-use App\Models\Division;
 use App\Models\Note;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -93,10 +92,9 @@ class DetentionController extends Controller
     */
    public function edit(Detention $detention) {
 
-      $division = Division::all();
       $type = Type::all();
       $note = Note::all();
-      return view('detention.editDetention', compact('detention', 'division', 'type', 'note'));
+      return view('detention.editDetention', compact('detention', 'type', 'note'));
    }
 
    /**
@@ -123,6 +121,8 @@ class DetentionController extends Controller
          'numeric' => 'Доступен ввод только цифр',
       ];
       $request->validate($validationRules, $errorMessage);
+
+      dd($request->all(), $detention->getAttributes());
 
       $detention->update([
          'kusp' => $request->input('kusp'),
@@ -156,4 +156,6 @@ class DetentionController extends Controller
       Excel::import(new DetentionsImport(), 'detentionsImport.xlsx');
       return redirect()->route('detention.index');
    }
+
+
 }
