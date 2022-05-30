@@ -9,6 +9,9 @@ class EditDetention extends Model
 {
    use HasFactory;
 
+   protected $dates = ['date'];
+
+
    protected $fillable = [
       'edit_kusp',
       'edit_date',
@@ -20,7 +23,19 @@ class EditDetention extends Model
       'detention_id',
    ];
 
-   public function detentions() {
+   public function detention() {
       return $this->belongsTo(Detention::class);
+   }
+
+   public function type() {
+      return $this->belongsTo(Type::class );
+   }
+
+   public function division() {
+      return $this->belongsTo(Division::class);
+   }
+
+   public function note() {
+      return $this->belongsTo(Note::class);
    }
 }

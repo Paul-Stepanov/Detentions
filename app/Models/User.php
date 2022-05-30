@@ -46,4 +46,8 @@ class User extends Authenticatable
    public function division() {
       return $this->belongsTo(Division::class);
    }
+
+   public function detentions() {
+      return $this->hasMany(Detention::class);
+   }
 }

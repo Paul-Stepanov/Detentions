@@ -135,6 +135,9 @@
             </p>
             <p class="detentions__card-item">
                {{ $det->division->title }}
+               @if($det->editing)
+                  <span class="error">Запись отредактирована и ждет утверждения</span>
+               @endif
             </p>
             <p class="detentions__card-item">
                {{ $det->type->title }}
@@ -150,11 +153,17 @@
             </p>
 
             <div class="detentions__edit-block detentions__edit-block--hide">
-
-               <a class="detentions__edit-block-item button__edit"
-                  href="{{ route('detention.edit', ['detention'=>$det->id]) }}">
-                  <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
-               </a>
+               @if(auth()->user()->role == 'admin')
+                  <a class="detentions__edit-block-item button__edit"
+                     href="{{ route('detention.edit', ['detention'=>$det->id]) }}">
+                     <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
+                  </a>
+               @else
+                  <a class="detentions__edit-block-item button__edit"
+                     href="{{ route('editDetention.userEdit', ['detention'=>$det->id]) }}">
+                     <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
+                  </a>
+               @endif
 
                <form class="detentions__edit-block-item"
                      action="{{ route('detention.destroy', ['detention'=>$det->id] )}}"
@@ -172,9 +181,9 @@
    {{ $detention->links() }}
    <a class="button" href="{{ route('detention.export') }}">Экспорт в Excel</a>
 
-   {{--   Раскомментировать при необходимости импорта задержаний--}}
-   <a class="button" href="{{ route('detention.import') }}">Импорт из Excel</a>
-
+   @if(auth()->user()->role == 'admin')
+      <a class="button" href="{{ route('detention.import') }}">Импорт из Excel</a>
+   @endif
    <script src="{{asset('js/showReportMenu.js')}}"></script>
    <script src="{{asset('js/editDetentionMenu.js')}}"></script>
 @endsection

@@ -20,7 +20,7 @@
             </label>
             <label class="form__label" for="date"> Дата:
                <input class="form__input-text" type="date" name="date" id="date" value="{{ old('date') }}">
-               @error('dste')
+               @error('date')
                <span class="error">*{{ $message }}</span>
                @enderror
             </label>

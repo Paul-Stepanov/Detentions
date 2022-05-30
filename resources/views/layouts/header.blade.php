@@ -12,18 +12,21 @@
                                           class="nav__menu-item-link">Задержания</a>
             </li>
             @if(auth()->user()->role == 'admin')
-
-            <li class="nav__menu-item"><a href="{{ route('division.index') }}" class="nav__menu-item-link">Список
-                  подразделений</a></li>
-            <li class="nav__menu-item"><a href="{{ route('type.index') }}" class="nav__menu-item-link">Виды
-                  задержаний</a>
-            </li>
-            <li class="nav__menu-item"><a href="{{ route('note.index') }}" class="nav__menu-item-link">Основания для
-                  прекращения
-                  регистрации ТС</a>
-            </li>
+               <li class="nav__menu-item"><a href="{{ route('division.index') }}" class="nav__menu-item-link">Список
+                     подразделений</a></li>
+               <li class="nav__menu-item"><a href="{{ route('type.index') }}" class="nav__menu-item-link">Виды
+                     задержаний</a>
+               </li>
+               <li class="nav__menu-item"><a href="{{ route('note.index') }}" class="nav__menu-item-link">Основания для
+                     прекращения
+                     регистрации ТС</a>
+               </li>
                <li class="nav__menu-item">
                   <a class="nav__menu-item-link" href="{{ route('register') }}">Регистрация пользователя</a>
+               </li>
+               <li class="nav__menu-item">
+                  <a class="nav__menu-item-link" href="{{ route('editDetention.showChangedDetention') }}">Отредактированные
+                     записи</a>
                </li>
             @endif
             <a class="nav__menu-item nav__menu-item--search" href='{{ route('search.showForm') }}' id="searchButton">

@@ -34,7 +34,12 @@ class Detention extends Model
       return $this->belongsTo(Note::class);
    }
 
-   public function edit_detention() {
+   public function edit_detentions() {
       return $this->hasMany(EditDetention::class);
    }
+
+   public function user() {
+      return $this->belongsTo(User::class);
+   }
+
 }

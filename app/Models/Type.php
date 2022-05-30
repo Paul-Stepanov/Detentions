@@ -14,8 +14,11 @@ class Type extends Model
       'title',
    ];
 
-   public function detentions()
-   {
+   public function detentions() {
       return $this->hasMany(Detention::class);
+   }
+
+   public function editDetentions() {
+      return $this->hasMany(EditDetention::class);
    }
 }

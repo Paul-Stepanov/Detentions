@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DetentionController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EditDetentionController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
@@ -34,6 +35,10 @@ Route::prefix('app')->middleware('auth')->group(function () {
    Route::get('divisions/import/', [DivisionController::class, 'import'])->name('division.import');
    Route::get('types/import/', [TypeController::class, 'import'])->name('type.import');
    Route::get('notes/import/', [NoteController::class, 'import'])->name('note.import');
+   Route::post('detentions/storingChanges/{detention}', [EditDetentionController::class, 'storingChanges'])->name('editDetention.storingChanges');
+   Route::get('detentions/{detention}/userEdit', [EditDetentionController::class, 'userEditDetention'])->name('editDetention.userEdit');
+   Route::get('detentions/showChanged', [EditDetentionController::class, 'showChangedDetention'])->name('editDetention.showChangedDetention');
+   Route::post('detentions/confirm/{editDetention}', [EditDetentionController::class, 'confirmChanges'])->name('editDetention.confirmChanges');
 });
 
 Route::prefix('search')->middleware('auth')->group(function () {

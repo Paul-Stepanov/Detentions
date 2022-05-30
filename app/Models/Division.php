@@ -19,4 +19,7 @@ class Division extends Model
    public function users() {
       return $this->hasMany(User::class);
    }
+   public function editDetentions() {
+      return $this->hasMany(EditDetention::class);
+   }
 }

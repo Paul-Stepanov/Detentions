@@ -9,6 +9,11 @@
       margin-bottom: 20px;
    }
 
+   &__card-wrapper {
+      border: 1px red solid;
+      margin-bottom: 10px;
+   }
+
    // .detentions__card - стили одной целой строки записи таблицы
    &__card {
       position: relative;
@@ -35,12 +40,22 @@
       text-align: center;
       word-wrap: break-word;
       white-space: normal;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       &--left-text {
          justify-self: start;
          text-align: justify;
       }
 
+      &--changed {
+         cursor: default;
+
+         &:hover {
+            text-shadow: none !important;
+         }
+      }
 
       &:hover {
          text-shadow: 0 0 5px white;

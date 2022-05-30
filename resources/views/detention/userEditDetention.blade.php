@@ -6,8 +6,7 @@
 
    <div class="detentions__create-page">
       <h1 class="title"> Редактирование задержания</h1>
-      <form class="form" action="{{ route('detention.update', $detention) }}" method="post">
-         @method('PATCH')
+      <form class="form" action="{{ route('editDetention.storingChanges', $detention) }}" method="post">
          @csrf
          <div class="detentions__form-container">
             <label class="form__label" for="kusp"> КУСП №:
@@ -28,24 +27,10 @@
          </div>
 
          <div class="detentions__form-container">
-            @if(auth()->user()->role == 'admin')
-               <label class="form__label" for="division"> Подразделение:
-                  <select class="form__select" name="division">
-                     <option class="form__option" value="title" disabled>Выберите подразделение</option>
-                     <option value="{{ $detention->division_id }}"
-                             selected> {{ $detention->division->title }} </option>
-                     @foreach( $division as $div)
-                        <option value="{{ $div->id }}"> {{ $div->title }} </option>
-                     @endforeach
-                  </select>
-                  @error('division')
-                  <sapn class="error">*{{ $message }}</sapn>
-                  @enderror
-               </label>
-            @else
-               <input type="text" name="division" id="division" value="{{ auth()->user()->division_id }}"
-                      hidden>
-            @endif
+
+            <input type="text" name="division" id="division" value="{{ auth()->user()->division_id }}"
+                   hidden>
+
             <label class="form__label" for="type"> Вид задержания:
                <select onchange="noteSelect(this)" class="form__select" name="type" id="typeSelect">
                   <option value="title" disabled>Выберите вид задержания</option>

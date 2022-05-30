@@ -17,4 +17,7 @@ class Note extends Model
    {
       return $this->hasMany(Detention::class);
    }
+   public function editDetentions() {
+      return $this->hasMany(EditDetention::class);
+   }
 }

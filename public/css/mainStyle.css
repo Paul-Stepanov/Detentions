@@ -189,6 +189,22 @@ h6 {
   border: 1px solid rgba(255, 0, 0, 0.4);
   transition: all 250ms linear;
 }
+.button__confirm {
+  width: 100%;
+  grid-column: span 7;
+  padding: 5px;
+  background-color: rgba(55, 150, 131, 0.5);
+  color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+  font-size: 16px;
+  transition: all 300ms ease-in-out;
+  margin-bottom: 5px;
+}
+.button__confirm:hover {
+  box-shadow: inset 0 0 10px rgba(55, 255, 0, 0.75);
+  transition: all 300ms ease-in-out;
+}
 
 .form {
   width: 100%;
@@ -384,6 +400,10 @@ h6 {
 .detentions__button-create {
   margin-bottom: 20px;
 }
+.detentions__card-wrapper {
+  border: 1px red solid;
+  margin-bottom: 10px;
+}
 .detentions__card {
   position: relative;
   width: 100%;
@@ -407,10 +427,19 @@ h6 {
   text-align: center;
   word-wrap: break-word;
   white-space: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .detentions__card-item--left-text {
   justify-self: start;
   text-align: justify;
+}
+.detentions__card-item--changed {
+  cursor: default;
+}
+.detentions__card-item--changed:hover {
+  text-shadow: none !important;
 }
 .detentions__card-item:hover {
   text-shadow: 0 0 5px white;
@@ -626,6 +655,13 @@ h6 {
   color: red;
   font-size: 12px;
   transition: all 300ms linear;
+}
+
+.alert__changes {
+  padding: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: rgba(55, 150, 57, 0.5);
 }
 
 .report__menu-wrapper {
