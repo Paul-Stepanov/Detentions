@@ -43,49 +43,54 @@
                   action="{{ route('editDetention.confirmChanges',['editDetention'=>$changed->id] ) }}">
                @csrf
                <p class="detentions__card-item detentions__card-item--changed">
-                  @unless($changed->edit_kusp == $det->kusp)
-                     {{ $changed->edit_kusp }}
-                     <input type="number" name="kusp" value="{{ $changed->edit_kusp }}" hidden>
+                  {{ $changed->kusp }}
+                  @unless($changed->kusp == $det->kusp)
+                     <span class="alert__changes">{{ $changed->kusp }}</span>
+                     <input type="number" name="kusp" value="{{ $changed->kusp }}" hidden>
                   @endunless
                </p>
                <p class="detentions__card-item detentions__card-item--changed">
-
-                  @unless($changed->edit_date == $det->date)
-                     {{ $changed->edit_date->format('d.m.Y') }}
-                     <input type="text" name="date" value="{{ $changed->edit_date }}" hidden>
+                  {{ $changed->date->format('d.m.Y') }}
+                  @unless($changed->date == $det->date)
+                     <span class="alert__changes">{{ $changed->date }}</span>
+                     <input type="text" name="date" value="{{ $changed->date }}" hidden>
                   @endunless
                </p>
                <p class="detentions__card-item detentions__card-item--changed">
-                  @unless($changed->edit_division_id == $det->division_id)
-                     {{ $changed->division->title }}
-                     <input type="text" name="division_id" value="{{ $changed->edit_division_id }}" hidden>
+                  {{ $changed->division->title }}
+                  @unless($changed->division_id == $det->division_id)
+                     <span class="alert__changes">{{ $changed->division->title }}</span>
+                     <input type="text" name="division_id" value="{{ $changed->division_id }}" hidden>
                   @endunless
                </p>
                <p class="detentions__card-item detentions__card-item--changed">
-                  @unless($changed->edit_type_id == $det->type_id)
-                     {{ $changed->type->title }}
-                     <input type="text" name="type_id" value="{{ $changed->edit_type_id }}" hidden>
+                  {{ $changed->type->title }}
+                  @unless($changed->type_id == $det->type_id)
+                     <span class="alert__changes">{{ $changed->type->title }}</span>
+                     <input type="text" name="type_id" value="{{ $changed->type_id }}" hidden>
                   @endunless
                </p>
                <p class="detentions__card-item detentions__card-item--left-text detentions__card-item--changed">
-                  @if(array_diff(explode(' ',$changed->edit_description),explode(' ',$det->description)) !=[] or $changed->edit_description != $det->description)
-                     {{ $changed->edit_description }}
-                     <input type="text" name="description" value="{{$changed->edit_description}}" hidden>
+                  {{ $changed->description }}
+                  @if(array_diff(explode(' ',$changed->description),explode(' ',$det->description)) !=[] or $changed->description != $det->description)
+                     <input type="text" name="description" value="{{$changed->description}}" hidden>
                      <span
-                        class="alert__changes">Изменения: {{ implode(' ; ',array_diff(explode(' ',$changed->edit_description),explode(' ',$det->description)))}}</span>
+                        class="alert__changes">Изменения: {{ implode(' ; ',array_diff(explode(' ',$changed->description),explode(' ',$det->description)))}}</span>
                   @endif
                </p>
                <p class="detentions__card-item detentions__card-item--changed">
-                  @unless($changed->edit_explanation == $det->explanation)
-                     {{ $changed->edit_explanation }}
-                     <input type="text" name="explanation" value="{{$changed->edit_explanation}}" hidden>
+                  {{ $changed->explanation }}
+                  @unless($changed->explanation == $det->explanation)
+                     <span class="alert__changes">{{ $changed->explanation }}</span>
+                     <input type="text" name="explanation" value="{{$changed->explanation}}" hidden>
                   @endunless
                </p>
                <p class="detentions__card-item detentions__card-item--changed">
-                  @isset($changed->edit_note_id)
-                     @unless($changed->edit_note_id == $det->note_id)
-                        {{  $changed->note->title }}
-                        <input type="text" name="note_id" value="{{$changed->edit_note_id}}" hidden>
+                  @isset($changed->note_id)
+                     {{  $changed->note->title }}
+                     @unless($changed->note_id == $det->note_id)
+                        <span class="alert__changes">{{ $changed->note->title }}</span>
+                        <input type="text" name="note_id" value="{{$changed->note_id}}" hidden>
                      @endunless
                   @endisset
                </p>

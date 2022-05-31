@@ -3,10 +3,15 @@
 @section('title', 'Редактирование записи задержания')
 
 @section('content')
-
    <div class="detentions__create-page">
       <h1 class="title"> Редактирование задержания</h1>
-      <form class="form" action="{{ route('editDetention.storingChanges', $detention) }}" method="post">
+
+      <form class="form" action="
+      @if($detention->detention_id)
+      {{ route('editDetention.storingChanges', $detention->detention_id) }}
+      @else
+      {{ route('editDetention.storingChanges', $detention) }}
+      @endif" method="post">
          @csrf
          <div class="detentions__form-container">
             <label class="form__label" for="kusp"> КУСП №:

@@ -5,7 +5,6 @@
 @section('content')
 
    <h1 class="title">Задержания</h1>
-
    <button class="detentions__button-create button">
       <a href=" {{ route('detention.create') }}"> Создать новую запись</a>
    </button>
@@ -124,7 +123,12 @@
          </p>
       </div>
 
-      @foreach($detention as $det)
+      @foreach($detention->map(function ($value, $index){
+                if ($value->edit_detentions->count()>0){
+                    return $value->edit_detentions->last();
+                } else{
+                    return $value;
+                }}) as $det)
 
          <div class="detentions__card" id="detentionsCard" onclick="showEditMenu(this)">
             <p class="detentions__card-item">
@@ -135,7 +139,7 @@
             </p>
             <p class="detentions__card-item">
                {{ $det->division->title }}
-               @if($det->editing)
+               @if($det->editing or $det->detention_id)
                   <span class="error">Запись отредактирована и ждет утверждения</span>
                @endif
             </p>
@@ -154,13 +158,23 @@
 
             <div class="detentions__edit-block detentions__edit-block--hide">
                @if(auth()->user()->role == 'admin')
+
                   <a class="detentions__edit-block-item button__edit"
-                     href="{{ route('detention.edit', ['detention'=>$det->id]) }}">
+                     @if($det->detention_id)
+                     href="{{ route('detention.edit', ['detention'=>$det->detention_id]) }}">
+                     @else
+                        href="{{ route('detention.edit', ['detention'=>$det->id]) }}">
+                     @endif
                      <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
                   </a>
+
                @else
                   <a class="detentions__edit-block-item button__edit"
-                     href="{{ route('editDetention.userEdit', ['detention'=>$det->id]) }}">
+                     @if($det->detention_id)
+                     href="{{ route('editDetention.userEdit', ['detention'=>$det->detention_id]) }}">
+                     @else
+                        href="{{ route('editDetention.userEdit', ['detention'=>$det->id]) }}">
+                     @endif
                      <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
                   </a>
                @endif

@@ -12,12 +12,17 @@ class EditDetentionController extends Controller
 {
    public function userEditDetention(Detention $detention) {
 
+      if ($detention->edit_detentions->count() > 0) {
+         $detention = $detention->edit_detentions->last();
+      }
+
       $type = Type::all();
       $note = Note::all();
       return view('detention.userEditDetention', compact('detention', 'type', 'note'));
    }
 
    public function storingChanges(Request $request, Detention $detention) {
+
       $validationRules = [
          'kusp' => 'nullable|numeric',
          'date' => 'required',
@@ -36,13 +41,13 @@ class EditDetentionController extends Controller
       $request->validate($validationRules, $errorMessage);
 
       EditDetention::query()->create([
-         'edit_kusp' => $request->input('kusp'),
-         'edit_date' => $request->input('date'),
-         'edit_division_id' => $request->input('division'),
-         'edit_type_id' => $request->input('type'),
-         'edit_description' => $request->input('description'),
-         'edit_explanation' => $request->input('explanation'),
-         'edit_note_id' => $request->input('note'),
+         'kusp' => $request->input('kusp'),
+         'date' => $request->input('date'),
+         'division_id' => $request->input('division'),
+         'type_id' => $request->input('type'),
+         'description' => $request->input('description'),
+         'explanation' => $request->input('explanation'),
+         'note_id' => $request->input('note'),
          'detention_id' => $detention->id,
       ]);
 

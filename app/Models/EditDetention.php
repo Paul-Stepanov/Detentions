@@ -13,13 +13,13 @@ class EditDetention extends Model
 
 
    protected $fillable = [
-      'edit_kusp',
-      'edit_date',
-      'edit_division_id',
-      'edit_type_id',
-      'edit_description',
-      'edit_note_id',
-      'edit_explanation',
+      'kusp',
+      'date',
+      'division_id',
+      'type_id',
+      'description',
+      'note_id',
+      'explanation',
       'detention_id',
    ];
 
@@ -28,7 +28,7 @@ class EditDetention extends Model
    }
 
    public function type() {
-      return $this->belongsTo(Type::class );
+      return $this->belongsTo(Type::class);
    }
 
    public function division() {
