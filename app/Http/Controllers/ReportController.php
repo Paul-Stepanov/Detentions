@@ -54,9 +54,16 @@ class ReportController extends Controller
          12 => 'Декабрь',
       ];
 
-      $detention = Detention::query()->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+      if (auth()->user()->role == 'admin' or auth()->user()->role == 'moderator') {
+         $detention = Detention::query()
+            ->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+      } else {
+         $detention = Detention::query()
+            ->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)
+            ->where('division_id', auth()->user()->division_id)->get();
+      }
 
-      if ((!$detention->isEmpty())) {
+      if ($detention->isNotEmpty()) {
          $uniqType = $detention->toQuery()
             ->join('types', 'detentions.type_id', '=', 'types.id')
             ->select('types.title', 'types.id')
@@ -109,9 +116,16 @@ class ReportController extends Controller
 
       $dates = [$dateStart, $dateEnd];
 
-      $detention = Detention::query()->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+      if (auth()->user()->role == 'admin' or auth()->user()->role == 'moderator') {
+         $detention = Detention::query()
+            ->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)->get();
+      } else {
+         $detention = Detention::query()
+            ->where('date', '>=', $dateStart)->where('date', '<=', $dateEnd)
+            ->where('division_id', auth()->user()->division_id)->get();
+      }
 
-      if ((!$detention->isEmpty())) {
+      if ($detention->isNotEmpty()) {
          $uniqType = $detention->toQuery()
             ->join('types', 'detentions.type_id', '=', 'types.id')
             ->select('types.title', 'types.id')

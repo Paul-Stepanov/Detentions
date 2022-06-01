@@ -13,8 +13,13 @@
       Сформировать отчет
       <a class="report__menu-link report__menu-link--hide" id="typeReport" href="{{ route('report.showTypeReport') }}">по
          виду</a>
-      <a class="report__menu-link report__menu-link--hide" id="divisionReport"
-         href="{{ route('report.showDivisionReport') }}">по подразделениям</a>
+      @if(auth()->user()->role == 'admin' or auth()->user()->role == 'moderator')
+         <a class="report__menu-link report__menu-link--hide" id="divisionReport"
+            href="{{ route('report.showDivisionReport') }}">по подразделениям</a>
+      @else
+         <a class="report__menu-link report__menu-link--hide" id="divisionReport"
+            href="{{ route('report.showDivisionReport') }}" hidden>по подразделениям</a>
+      @endif
       <a class="report__menu-link report__menu-link--hide" id="advancedReport" href="#">расширенный</a>
    </button>
 

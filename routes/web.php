@@ -54,7 +54,7 @@ Route::prefix('sort')->group(function () {
    Route::get('column/{column}/sorted/{sorted}', [SortController::class, 'sortColumn'])->name('sort.sortColumn');
 });
 
-Route::prefix('report')->group(function () {
+Route::prefix('report')->middleware('auth')->group(function () {
    Route::get('type', [ReportController::class, 'showTypeReport'])->name('report.showTypeReport');
    Route::post('type', [ReportController::class, 'createTypeReport'])->name('report.createTypeReport');
    Route::get('type/export', [ReportController::class, 'exportTypeReport'])->name('report.typeExport');
