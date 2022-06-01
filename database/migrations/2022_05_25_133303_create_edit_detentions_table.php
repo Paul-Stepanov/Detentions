@@ -21,7 +21,7 @@ class CreateEditDetentionsTable extends Migration
          $table->text('edit_description');
          $table->integer('edit_note_id')->nullable();
          $table->string('edit_explanation')->nullable();
-         $table->foreignId('detention_id')->constrained()->onUpdate('cascade');
+         $table->foreignId('detention_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
          $table->timestamps();
       });
    }

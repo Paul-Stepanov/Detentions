@@ -60,7 +60,7 @@ class EditDetentionController extends Controller
 
    public function showChangedDetention() {
 
-      $detentions = Detention::query()->where('editing', 1)->get();
+      $detentions = Detention::query()->where('editing', 1)->orWhere('deleting', 1)->get();
 
       return view('detention.showChangedDetention', compact('detentions'));
    }
@@ -75,6 +75,12 @@ class EditDetentionController extends Controller
             'editing' => 0
          ]);
       }
+      return redirect()->back();
+   }
+
+   public function userDeleteDetention(Detention $detention) {
+      $detention->deleting = 1;
+      $detention->save();
       return redirect()->back();
    }
 }

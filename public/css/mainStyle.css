@@ -205,6 +205,14 @@ h6 {
   box-shadow: inset 0 0 10px rgba(55, 255, 0, 0.75);
   transition: all 300ms ease-in-out;
 }
+.button__confirm--delete {
+  background-color: rgba(150, 55, 55, 0.5);
+  transition: all 300ms ease-in-out;
+}
+.button__confirm--delete:hover {
+  box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.75);
+  transition: all 300ms ease-in-out;
+}
 
 .form {
   width: 100%;

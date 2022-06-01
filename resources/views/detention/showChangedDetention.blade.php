@@ -36,6 +36,13 @@
                @isset($det->note->title) {{  $det->note->title }} @endisset
             </p>
          </div>
+         @if($det->deleting)
+            <form class="detentions__card" action="{{ route('detention.destroy', $det) }}" method="post">
+               @csrf
+               @method('DELETE')
+               <button class="button__confirm button__confirm--delete" type="submit">Удалить запись</button>
+            </form>
+         @endif
 
          @foreach($det->edit_detentions as $changed)
 

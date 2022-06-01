@@ -141,6 +141,8 @@
                {{ $det->division->title }}
                @if($det->editing or $det->detention_id)
                   <span class="error">Запись отредактирована и ждет утверждения</span>
+               @elseif($det->deleting)
+                  <span class="error">Запись удалена и ждет утверждения</span>
                @endif
             </p>
             <p class="detentions__card-item">
@@ -167,7 +169,19 @@
                      @endif
                      <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
                   </a>
-
+                  <form class="detentions__edit-block-item"
+                        @if($det->detention_id)
+                        action="{{ route('detention.destroy', ['detention'=>$det->detention_id] )}}"
+                        @else
+                        action="{{ route('detention.destroy', ['detention'=>$det->id] )}}"
+                        @endif
+                        method="post">
+                     @csrf
+                     @method('DELETE')
+                     <button class="button__delete">
+                        <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="удалить">
+                     </button>
+                  </form>
                @else
                   <a class="detentions__edit-block-item button__edit"
                      @if($det->detention_id)
@@ -177,17 +191,19 @@
                      @endif
                      <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
                   </a>
+                  <form class="detentions__edit-block-item"
+                        @if($det->detention_id)
+                        action="{{ route('editDetention.userDelete', ['detention'=>$det->detention_id] )}}"
+                        @else
+                        action="{{ route('editDetention.userDelete', ['detention'=>$det->id] )}}"
+                        @endif
+                        method="post">
+                     @csrf
+                     <button class="button__delete">
+                        <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="удалить">
+                     </button>
+                  </form>
                @endif
-
-               <form class="detentions__edit-block-item"
-                     action="{{ route('detention.destroy', ['detention'=>$det->id] )}}"
-                     method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button class="button__delete">
-                     <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="удалить">
-                  </button>
-               </form>
             </div>
          </div>
       @endforeach
