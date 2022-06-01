@@ -45,7 +45,8 @@
             </form>
             <form class="detentions__card" action="{{ route('editDetention.userDelete', $det) }}" method="post">
                @csrf
-               <button class="button__confirm button__confirm" type="submit" value="reject" name="submit">Отклонить</button>
+               <button class="button__confirm button__confirm" type="submit" value="reject" name="submit">Отклонить
+               </button>
             </form>
 
          @endif
@@ -108,6 +109,9 @@
                   @endisset
                </p>
                <button class="button__confirm" type="submit">Утвердить изменения</button>
+               <button class="button__confirm button__confirm--delete" type="submit" name="submit" value="reject">
+                  Отклонить изменения
+               </button>
             </form>
          @endforeach
       </div>

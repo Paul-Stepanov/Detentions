@@ -67,8 +67,11 @@ class EditDetentionController extends Controller
 
    public function confirmChanges(Request $request, EditDetention $editDetention) {
 
-      $editDetention->detention()->update($request->except('_token'));
       $detention = $editDetention->detention;
+
+      if ($request->submit != 'reject') {
+         $editDetention->detention()->update($request->except('_token'));
+      }
       $editDetention->delete();
       if ($detention->edit_detentions->count() == 0) {
          $detention->update([
@@ -82,6 +85,7 @@ class EditDetentionController extends Controller
 
       if ($request->submit == 'reject') {
          $detention->deleting = 0;
+         $detention->comment_to_deleting = '';
       } else {
          $validationRules = [
             'comment' => 'required',
@@ -98,7 +102,7 @@ class EditDetentionController extends Controller
       }
       $detention->save();
 
-      return redirect()->route('detention.index');
+      return redirect()->back();
    }
 
    public function userDeleteDetentionForm(Detention $detention) {
