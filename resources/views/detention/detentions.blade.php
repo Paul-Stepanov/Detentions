@@ -191,18 +191,14 @@
                      @endif
                      <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
                   </a>
-                  <form class="detentions__edit-block-item"
-                        @if($det->detention_id)
-                        action="{{ route('editDetention.userDelete', ['detention'=>$det->detention_id] )}}"
-                        @else
-                        action="{{ route('editDetention.userDelete', ['detention'=>$det->id] )}}"
-                        @endif
-                        method="post">
-                     @csrf
-                     <button class="button__delete">
-                        <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="удалить">
-                     </button>
-                  </form>
+                  <a class="detentions__edit-block-item button__delete"
+                     @if($det->detention_id)
+                     href="{{ route('editDetention.userDeleteForm', ['detention'=>$det->detention_id]) }}">
+                     @else
+                        href="{{ route('editDetention.userDeleteForm', ['detention'=>$det->id]) }}">
+                     @endif
+                     <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="редактировать">
+                  </a>
                @endif
             </div>
          </div>

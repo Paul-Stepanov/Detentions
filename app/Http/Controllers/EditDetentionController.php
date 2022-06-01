@@ -78,9 +78,30 @@ class EditDetentionController extends Controller
       return redirect()->back();
    }
 
-   public function userDeleteDetention(Detention $detention) {
-      $detention->deleting = 1;
+   public function userDeleteDetention(Request $request, Detention $detention) {
+
+      if ($request->submit == 'reject') {
+         $detention->deleting = 0;
+      } else {
+         $validationRules = [
+            'comment' => 'required',
+         ];
+
+         $errorMessage = [
+            'required' => 'Поле обязательно для заполнения',
+         ];
+
+         $request->validate($validationRules, $errorMessage);
+
+         $detention->comment_to_deleting = $request->input('comment');
+         $detention->deleting = 1;
+      }
       $detention->save();
-      return redirect()->back();
+
+      return redirect()->route('detention.index');
+   }
+
+   public function userDeleteDetentionForm(Detention $detention) {
+      return view('detention.userDeleteDetentionForm', compact('detention'));
    }
 }
