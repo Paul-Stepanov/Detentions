@@ -19,9 +19,11 @@ class DetentionController extends Controller
     * @return Response
     */
    public function index() {
-      auth()->user()->role == 'admin' ?
-         $detention = Detention::query()->orderByDesc('date')->paginate(10) :
+      if (auth()->user()->role == 'admin' or auth()->user()->role == 'moderator') {
+         $detention = Detention::query()->orderByDesc('date')->paginate(10);
+      } else {
          $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(10);
+      }
 
       return view('detention.detentions', compact('detention'));
    }

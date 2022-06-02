@@ -5,7 +5,6 @@
 @section('content')
    <div class="detentions__create-page">
       <h1 class="title"> Редактирование задержания</h1>
-
       <form class="form" action="
       @if($detention->detention_id)
       {{ route('editDetention.storingChanges', $detention->detention_id) }}
@@ -33,7 +32,7 @@
 
          <div class="detentions__form-container">
 
-            <input type="text" name="division" id="division" value="{{ auth()->user()->division_id }}"
+            <input type="text" name="division" id="division" value="{{ $detention->division_id }}"
                    hidden>
 
             <label class="form__label" for="type"> Вид задержания:
