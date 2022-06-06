@@ -21,6 +21,7 @@ class EditDetention extends Model
       'note_id',
       'explanation',
       'detention_id',
+      'user_update',
    ];
 
    public function detention() {

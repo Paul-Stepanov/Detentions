@@ -49,8 +49,8 @@ class EditDetentionController extends Controller
          'explanation' => $request->input('explanation'),
          'note_id' => $request->input('note'),
          'detention_id' => $detention->id,
+         'user_update' => auth()->user()->id,
       ]);
-
       if (!$detention->editing) {
          $detention->editing = 1;
          $detention->save();
@@ -70,6 +70,8 @@ class EditDetentionController extends Controller
       $detention = $editDetention->detention;
 
       if ($request->submit != 'reject') {
+         $detention->user_update = $editDetention->user_update;
+         $detention->save();
          $editDetention->detention()->update($request->except('_token'));
       }
       $editDetention->delete();
@@ -102,7 +104,7 @@ class EditDetentionController extends Controller
       }
       $detention->save();
 
-      return redirect()->back();
+      return redirect()->route('detention.index');
    }
 
    public function userDeleteDetentionForm(Detention $detention) {

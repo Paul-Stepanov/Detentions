@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnCommentDelitingToDetentionsTable extends Migration
+class AddColumnUserUpdateToEditDetentionsTable extends Migration
 {
    /**
     * Run the migrations.
@@ -12,8 +12,8 @@ class AddColumnCommentDelitingToDetentionsTable extends Migration
     * @return void
     */
    public function up() {
-      Schema::table('detentions', function (Blueprint $table) {
-         $table->string('comment_to_deleting')->nullable();
+      Schema::table('edit_detentions', function (Blueprint $table) {
+         $table->bigInteger('user_update')->nullable();
       });
    }
 
@@ -23,8 +23,8 @@ class AddColumnCommentDelitingToDetentionsTable extends Migration
     * @return void
     */
    public function down() {
-      Schema::table('detentions', function (Blueprint $table) {
-         $table->dropColumn('comment_to_deleting');
+      Schema::table('edit_detentions', function (Blueprint $table) {
+         $table->dropColumn('user_update');
       });
    }
 }

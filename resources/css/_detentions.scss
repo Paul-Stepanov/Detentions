@@ -133,4 +133,30 @@
       margin-top: 20px;
    }
 
+   &__show-card-wrapper {
+      max-width: 50%;
+      margin: 0 auto;
+   }
+
+   &__show-card-body {
+      border: $font-secondary-color 1px solid;
+      border-radius: 5px;
+      padding: 10px;
+
+      &-block {
+         display: flex;
+         padding: 10px 0px;
+      }
+
+      &-title {
+         font-family: Comfortaa, serif;
+         color: $font-secondary-color;
+         padding: 0 10px 0 0;
+      }
+
+      &-item {
+         text-align: justify;
+      }
+   }
+
 }

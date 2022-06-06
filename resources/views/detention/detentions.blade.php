@@ -164,8 +164,15 @@
             </p>
 
             <div class="detentions__edit-block detentions__edit-block--hide">
+               <a class="detentions__edit-block-item button__edit"
+                  @if($det->detention_id)
+                  href="{{ route('detention.show', ['detention'=>$det->detention_id]) }}">
+                  @else
+                     href="{{ route('detention.show', ['detention'=>$det->id]) }}">
+                  @endif
+                  <img class="button__edit-img" src="{{asset('img/icons/show-button.png')}}" alt="просмотр">
+               </a>
                @if(auth()->user()->role == 'admin')
-
                   <a class="detentions__edit-block-item button__edit"
                      @if($det->detention_id)
                      href="{{ route('detention.edit', ['detention'=>$det->detention_id]) }}">
