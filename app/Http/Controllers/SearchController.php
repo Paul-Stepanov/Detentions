@@ -21,8 +21,6 @@ class SearchController extends Controller
 
    public function createSearchResults(Request $request) {
 
-      // todo пофиксить поиск по дате созданию и дате обновлению
-
       $kusp = $request->input('kusp');
       $dateStart = $request->input('dateStart');
       $dateEnd = $request->input('dateEnd');
@@ -36,17 +34,17 @@ class SearchController extends Controller
       $notes = $request->input('note');
       $description = $request->input('description');
 
-      if ($dateCreateStart > $dateCreateEnd) {
+      if ($dateCreateStart > $dateCreateEnd & $dateCreateStart != null & $dateCreateEnd != null) {
          $temp1 = $dateCreateEnd;
          $dateCreateEnd = $dateCreateStart;
          $dateCreateStart = $temp1;
       }
-      if ($dateUpdateStart > $dateUpdateEnd) {
+      if ($dateUpdateStart > $dateUpdateEnd & $dateUpdateStart != null & $dateUpdateEnd != null) {
          $temp2 = $dateUpdateEnd;
          $dateUpdateEnd = $dateUpdateStart;
          $dateUpdateStart = $temp2;
       }
-      if ($dateStart > $dateEnd) {
+      if ($dateStart > $dateEnd & $dateStart != null & $dateEnd != null) {
          $temp3 = $dateEnd;
          $dateEnd = $dateStart;
          $dateStart = $temp3;
