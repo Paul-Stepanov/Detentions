@@ -94,8 +94,7 @@ class DetentionController extends Controller
     * @param Detention $detention
     * @return Response
     */
-   public
-   function edit(Detention $detention) {
+   public function edit(Detention $detention) {
       $type = Type::all();
       $note = Note::all();
       return view('detention.editDetention', compact('detention', 'type', 'note'));
@@ -108,8 +107,7 @@ class DetentionController extends Controller
     * @param Detention $detention
     * @return Response
     */
-   public
-   function update(Request $request, Detention $detention) {
+   public function update(Request $request, Detention $detention) {
 
       $validationRules = [
          'kusp' => 'sometimes|nullable|numeric',
@@ -148,19 +146,16 @@ class DetentionController extends Controller
     * @param Detention $detention
     * @return Response
     */
-   public
-   function destroy(Detention $detention) {
+   public function destroy(Detention $detention) {
       $detention->delete();
       return redirect()->route('detention.index');
    }
 
-   public
-   function export() {
+   public function export() {
       return Excel::download(new DetentionsExport, 'detention.xlsx');
    }
 
-   public
-   function import() {
+   public function import() {
       Excel::import(new DetentionsImport(), 'detentionsImport.xlsx');
       return redirect()->route('detention.index');
    }

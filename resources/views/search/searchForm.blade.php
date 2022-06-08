@@ -25,14 +25,29 @@
             </label>
 
             <div class="search-window__form-container">
-               <label class="form__label" for="dateStart"> Дата с:
+               <label class="form__label" for="dateStart"> Дата задержания с:
                   <input class="form__input-text" type="date" name="dateStart" id="dateStart">
                </label>
-               <label class="form__label" for="dateEnd"> Дата по:
+               <label class="form__label" for="dateEnd"> Дата задержания по:
                   <input class="form__input-text" type="date" name="dateEnd" id="dateEnd">
                </label>
             </div>
-
+            <div class="search-window__form-container">
+               <label class="form__label" for="dateCreateStart"> Дата создания записи с:
+                  <input class="form__input-text" type="date" name="dateCreateStart" id="dateCreateStart">
+               </label>
+               <label class="form__label" for="dateCreateEnd"> Дата создания записи по:
+                  <input class="form__input-text" type="date" name="dateCreateEnd" id="dateCreateEnd">
+               </label>
+            </div>
+            <div class="search-window__form-container">
+               <label class="form__label" for="dateUpdateStart"> Дата обновления записи с:
+                  <input class="form__input-text" type="date" name="dateUpdateStart" id="dateUpdateStart">
+               </label>
+               <label class="form__label" for="dateUpdateEnd"> Дата обновления записи по:
+                  <input class="form__input-text" type="date" name="dateUpdateEnd" id="dateUpdateEnd">
+               </label>
+            </div>
             <div class="search-window__form-container">
                @if(auth()->user()->role == 'admin' or auth()->user()->role =='moderator')
                   <label class="form__label" for="division"> Подразделение:

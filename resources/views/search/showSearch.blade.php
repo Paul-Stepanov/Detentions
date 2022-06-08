@@ -182,7 +182,7 @@
          </div>
       @endforeach
    </div>
-   @if($detention != [])
+   @if($detention != collect([]))
       {{ $detention-> links() }}
    @else
       <div class="error">Поиск не дал результатов</div>

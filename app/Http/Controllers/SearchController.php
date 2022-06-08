@@ -21,19 +21,35 @@ class SearchController extends Controller
 
    public function createSearchResults(Request $request) {
 
+      // todo пофиксить поиск по дате созданию и дате обновлению
+
       $kusp = $request->input('kusp');
       $dateStart = $request->input('dateStart');
       $dateEnd = $request->input('dateEnd');
+      $dateCreateStart = $request->input('dateCreateStart');
+      $dateCreateEnd = $request->input('dateCreateEnd');
+      $dateUpdateStart = $request->input('dateUpdateStart');
+      $dateUpdateEnd = $request->input('dateUpdateEnd');
       $divisions = $request->input('division');
       $types = $request->input('type');
       $explanation = $request->input('explanation');
       $notes = $request->input('note');
       $description = $request->input('description');
 
+      if ($dateCreateStart > $dateCreateEnd) {
+         $temp1 = $dateCreateEnd;
+         $dateCreateEnd = $dateCreateStart;
+         $dateCreateStart = $temp1;
+      }
+      if ($dateUpdateStart > $dateUpdateEnd) {
+         $temp2 = $dateUpdateEnd;
+         $dateUpdateEnd = $dateUpdateStart;
+         $dateUpdateStart = $temp2;
+      }
       if ($dateStart > $dateEnd) {
-         $temp = $dateEnd;
+         $temp3 = $dateEnd;
          $dateEnd = $dateStart;
-         $dateStart = $temp;
+         $dateStart = $temp3;
       }
 
       $detention = Detention::query()->when($kusp, function ($query, $kusp) {
@@ -52,8 +68,15 @@ class SearchController extends Controller
          return $query->where('note_id', '=', "$notes");
       })->when($description, function ($query, $description) {
          return $query->where('description', 'like', "%$description%");
+      })->when($dateCreateStart, function ($query, $dateCreateStart) {
+         return $query->where('created_at', '>=', $dateCreateStart);
+      })->when($dateCreateEnd, function ($query, $dateCreateEnd) {
+         return $query->where('created_at', '<=', $dateCreateEnd);
+      })->when($dateUpdateStart, function ($query, $dateUpdateStart) {
+         return $query->where('updated_at', '>=', $dateUpdateStart);
+      })->when($dateUpdateEnd, function ($query, $dateUpdateEnd) {
+         return $query->where('updated_at', '<=', $dateUpdateEnd);
       })->get();
-
       Session::put('searchResult', $detention);
       return redirect()->route('search.showSearchResults');
    }
@@ -69,7 +92,7 @@ class SearchController extends Controller
       if (session()->get('searchResult')->isNotEmpty()) {
          $detention = session()->get('searchResult')->toQuery()->orderByDesc('date')->paginate(5);
       } else {
-         $detention = [];
+         $detention = collect([]);
       }
       return view('search.showSearch', compact('detention'));
    }
