@@ -37,11 +37,18 @@
             </p>
          </div>
          @if($det->deleting)
-            <form class="detentions__card" action="{{ route('detention.destroy', $det) }}" method="post">
+            <p class="alert__changes">Причина удаления: {{ $det->comment_to_deleting }}</p>
+            <form class="detentions__form-container" action="{{ route('detention.destroy', $det) }}" method="post">
                @csrf
                @method('DELETE')
                <button class="button__confirm button__confirm--delete" type="submit">Удалить запись</button>
             </form>
+            <form class="detentions__card" action="{{ route('editDetention.userDelete', $det) }}" method="post">
+               @csrf
+               <button class="button__confirm button__confirm" type="submit" value="reject" name="submit">Отклонить
+               </button>
+            </form>
+
          @endif
 
          @foreach($det->edit_detentions as $changed)
@@ -102,6 +109,9 @@
                   @endisset
                </p>
                <button class="button__confirm" type="submit">Утвердить изменения</button>
+               <button class="button__confirm button__confirm--delete" type="submit" name="submit" value="reject">
+                  Отклонить изменения
+               </button>
             </form>
          @endforeach
       </div>

@@ -38,6 +38,7 @@ Route::prefix('app')->middleware('auth')->group(function () {
    Route::post('detentions/storingChanges/{detention}', [EditDetentionController::class, 'storingChanges'])->name('editDetention.storingChanges');
    Route::get('detentions/{detention}/userEdit', [EditDetentionController::class, 'userEditDetention'])->name('editDetention.userEdit');
    Route::post('detentions/userDelete/{detention}', [EditDetentionController::class, 'userDeleteDetention'])->name('editDetention.userDelete');
+   Route::get('detentions/userDelete/{detention}', [EditDetentionController::class, 'userDeleteDetentionForm'])->name('editDetention.userDeleteForm');
    Route::get('detentions/showChanged', [EditDetentionController::class, 'showChangedDetention'])->name('editDetention.showChangedDetention');
    Route::post('detentions/confirm/{editDetention}', [EditDetentionController::class, 'confirmChanges'])->name('editDetention.confirmChanges');
 });
@@ -53,7 +54,7 @@ Route::prefix('sort')->group(function () {
    Route::get('column/{column}/sorted/{sorted}', [SortController::class, 'sortColumn'])->name('sort.sortColumn');
 });
 
-Route::prefix('report')->group(function () {
+Route::prefix('report')->middleware('auth')->group(function () {
    Route::get('type', [ReportController::class, 'showTypeReport'])->name('report.showTypeReport');
    Route::post('type', [ReportController::class, 'createTypeReport'])->name('report.createTypeReport');
    Route::get('type/export', [ReportController::class, 'exportTypeReport'])->name('report.typeExport');

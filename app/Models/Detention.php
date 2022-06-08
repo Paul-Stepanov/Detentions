@@ -18,6 +18,7 @@ class Detention extends Model
       'note_id',
       'explanation',
       'editing',
+      'user_update',
    ];
 
    protected $dates = ['date'];

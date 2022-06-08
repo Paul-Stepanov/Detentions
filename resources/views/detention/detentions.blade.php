@@ -13,8 +13,13 @@
       Сформировать отчет
       <a class="report__menu-link report__menu-link--hide" id="typeReport" href="{{ route('report.showTypeReport') }}">по
          виду</a>
-      <a class="report__menu-link report__menu-link--hide" id="divisionReport"
-         href="{{ route('report.showDivisionReport') }}">по подразделениям</a>
+      @if(auth()->user()->role == 'admin' or auth()->user()->role == 'moderator')
+         <a class="report__menu-link report__menu-link--hide" id="divisionReport"
+            href="{{ route('report.showDivisionReport') }}">по подразделениям</a>
+      @else
+         <a class="report__menu-link report__menu-link--hide" id="divisionReport"
+            href="{{ route('report.showDivisionReport') }}" hidden>по подразделениям</a>
+      @endif
       <a class="report__menu-link report__menu-link--hide" id="advancedReport" href="#">расширенный</a>
    </button>
 
@@ -159,8 +164,15 @@
             </p>
 
             <div class="detentions__edit-block detentions__edit-block--hide">
+               <a class="detentions__edit-block-item button__edit"
+                  @if($det->detention_id)
+                  href="{{ route('detention.show', ['detention'=>$det->detention_id]) }}">
+                  @else
+                     href="{{ route('detention.show', ['detention'=>$det->id]) }}">
+                  @endif
+                  <img class="button__edit-img" src="{{asset('img/icons/show-button.png')}}" alt="просмотр">
+               </a>
                @if(auth()->user()->role == 'admin')
-
                   <a class="detentions__edit-block-item button__edit"
                      @if($det->detention_id)
                      href="{{ route('detention.edit', ['detention'=>$det->detention_id]) }}">
@@ -191,18 +203,14 @@
                      @endif
                      <img class="button__edit-img" src="{{asset('img/icons/edit-button.png')}}" alt="редактировать">
                   </a>
-                  <form class="detentions__edit-block-item"
-                        @if($det->detention_id)
-                        action="{{ route('editDetention.userDelete', ['detention'=>$det->detention_id] )}}"
-                        @else
-                        action="{{ route('editDetention.userDelete', ['detention'=>$det->id] )}}"
-                        @endif
-                        method="post">
-                     @csrf
-                     <button class="button__delete">
-                        <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="удалить">
-                     </button>
-                  </form>
+                  <a class="detentions__edit-block-item button__delete"
+                     @if($det->detention_id)
+                     href="{{ route('editDetention.userDeleteForm', ['detention'=>$det->detention_id]) }}">
+                     @else
+                        href="{{ route('editDetention.userDeleteForm', ['detention'=>$det->id]) }}">
+                     @endif
+                     <img class="button__delete-img" src="{{asset('img/icons/delete-button.png')}}" alt="редактировать">
+                  </a>
                @endif
             </div>
          </div>

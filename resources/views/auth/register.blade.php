@@ -13,9 +13,7 @@
                    value="{{ old('name') }}" required autocomplete="name" autofocus>
 
             @error('name')
-            <span class="error" role="alert">
-                                        <strong>*{{ $message }}</strong>
-                                    </span>
+            <span class="error" role="alert">*{{ $message }}</span>
             @enderror
          </label>
          <label class="form__label" for="division"> {{ __('Подразделение') }}
@@ -29,7 +27,23 @@
                   <option value="{{ $div->id }}"> {{ $div->title }} </option>
                @endforeach
             </select>
-            @error('division')
+            @error('division_id')
+            <span class="error">*{{ $message }}</span>
+            @enderror
+         </label>
+
+         <label class="form__label" for="role"> {{ __('Роль пользователя') }}
+            <select class="form__select" name="role">
+               @if(old('role'))
+                  <option value="{{ old('role') }}"> {{ old('role') }} </option>
+               @else
+                  <option class="form__option" value="title" disabled selected> Выберите роль пользователя</option>
+                  <option value="user"> user</option>
+                  <option value="moderator"> moderator</option>
+                  <option value="admin"> admin</option>
+               @endif
+            </select>
+            @error('role')
             <span class="error">*{{ $message }}</span>
             @enderror
          </label>
@@ -40,20 +54,16 @@
                    name="email" value="{{ old('email') }}" required autocomplete="email">
 
             @error('email')
-            <span class="error" role="alert">
-                                        <strong>*{{ $message }}</strong>
-                                    </span>
+            <span class="error" role="alert">*{{ $message }}</span>
             @enderror
          </label>
-         <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Пароль') }}
+         <label for="password" class="form__label">{{ __('Пароль') }}
 
             <input id="password" type="password" class="form__input-text"
                    name="password" required autocomplete="new-password">
 
             @error('password')
-            <span class="error" role="alert">
-                                        <strong>*{{ $message }}</strong>
-                                    </span>
+            <span class="error" role="alert">*{{ $message }}</span>
             @enderror
          </label>
 

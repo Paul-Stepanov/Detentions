@@ -7,8 +7,10 @@ use App\Imports\DetentionsImport;
 use App\Models\Detention;
 use App\Models\Note;
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DetentionController extends Controller
@@ -19,10 +21,11 @@ class DetentionController extends Controller
     * @return Response
     */
    public function index() {
-      auth()->user()->role == 'admin' ?
-         $detention = Detention::query()->orderByDesc('date')->paginate(10) :
+      if (auth()->user()->role == 'admin' or auth()->user()->role == 'moderator') {
+         $detention = Detention::query()->orderByDesc('date')->paginate(10);
+      } else {
          $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(10);
-
+      }
       return view('detention.detentions', compact('detention'));
    }
 
@@ -61,7 +64,7 @@ class DetentionController extends Controller
 
       $request->validate($validationRules, $errorMessage);
 
-      Detention::query()->create([
+      Auth::user()->detentions()->create([
          'kusp' => $request->input('kusp'),
          'date' => $request->input('date'),
          'division_id' => $request->input('division'),
@@ -81,7 +84,8 @@ class DetentionController extends Controller
     * @return Response
     */
    public function show(Detention $detention) {
-      //
+      $userUpdate = User::query()->find($detention->user_update);
+      return view('detention.showDetention', compact('detention', 'userUpdate'));
    }
 
    /**
@@ -91,7 +95,6 @@ class DetentionController extends Controller
     * @return Response
     */
    public function edit(Detention $detention) {
-
       $type = Type::all();
       $note = Note::all();
       return view('detention.editDetention', compact('detention', 'type', 'note'));
@@ -130,6 +133,7 @@ class DetentionController extends Controller
          'description' => $request->input('description'),
          'explanation' => $request->input('explanation'),
          'note_id' => $request->input('note'),
+         'user_update' => auth()->user()->id,
       ]);
 
       return redirect()->route('detention.index');

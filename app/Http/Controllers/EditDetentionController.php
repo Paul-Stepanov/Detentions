@@ -49,8 +49,8 @@ class EditDetentionController extends Controller
          'explanation' => $request->input('explanation'),
          'note_id' => $request->input('note'),
          'detention_id' => $detention->id,
+         'user_update' => auth()->user()->id,
       ]);
-
       if (!$detention->editing) {
          $detention->editing = 1;
          $detention->save();
@@ -67,8 +67,13 @@ class EditDetentionController extends Controller
 
    public function confirmChanges(Request $request, EditDetention $editDetention) {
 
-      $editDetention->detention()->update($request->except('_token'));
       $detention = $editDetention->detention;
+
+      if ($request->submit != 'reject') {
+         $detention->user_update = $editDetention->user_update;
+         $detention->save();
+         $editDetention->detention()->update($request->except('_token'));
+      }
       $editDetention->delete();
       if ($detention->edit_detentions->count() == 0) {
          $detention->update([
@@ -78,9 +83,31 @@ class EditDetentionController extends Controller
       return redirect()->back();
    }
 
-   public function userDeleteDetention(Detention $detention) {
-      $detention->deleting = 1;
+   public function userDeleteDetention(Request $request, Detention $detention) {
+
+      if ($request->submit == 'reject') {
+         $detention->deleting = 0;
+         $detention->comment_to_deleting = '';
+      } else {
+         $validationRules = [
+            'comment' => 'required',
+         ];
+
+         $errorMessage = [
+            'required' => 'Поле обязательно для заполнения',
+         ];
+
+         $request->validate($validationRules, $errorMessage);
+
+         $detention->comment_to_deleting = $request->input('comment');
+         $detention->deleting = 1;
+      }
       $detention->save();
-      return redirect()->back();
+
+      return redirect()->route('detention.index');
+   }
+
+   public function userDeleteDetentionForm(Detention $detention) {
+      return view('detention.userDeleteDetentionForm', compact('detention'));
    }
 }

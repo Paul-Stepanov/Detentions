@@ -99,6 +99,9 @@ h6 {
   transition: all 300ms;
   position: relative;
 }
+.button--wide {
+  width: 100%;
+}
 .button a {
   color: white;
   font-weight: 300;
@@ -509,6 +512,27 @@ h6 {
 }
 .detentions__form-button {
   margin-top: 20px;
+}
+.detentions__show-card-wrapper {
+  max-width: 50%;
+  margin: 0 auto;
+}
+.detentions__show-card-body {
+  border: #c1ab7a 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+.detentions__show-card-body-block {
+  display: flex;
+  padding: 10px 0px;
+}
+.detentions__show-card-body-title {
+  font-family: Comfortaa, serif;
+  color: #c1ab7a;
+  padding: 0 10px 0 0;
+}
+.detentions__show-card-body-item {
+  text-align: justify;
 }
 
 .division {

@@ -5,7 +5,6 @@
 @section('content')
    <div class="detentions__create-page">
       <h1 class="title"> Редактирование задержания</h1>
-
       <form class="form" action="
       @if($detention->detention_id)
       {{ route('editDetention.storingChanges', $detention->detention_id) }}
@@ -32,9 +31,24 @@
          </div>
 
          <div class="detentions__form-container">
-
-            <input type="text" name="division" id="division" value="{{ auth()->user()->division_id }}"
-                   hidden>
+            @if(auth()->user()->role == 'moderator')
+               <label class="form__label" for="division"> Подразделение:
+                  <select class="form__select" name="division">
+                     <option class="form__option" value="title" disabled>Выберите подразделение</option>
+                     <option value="{{ $detention->division_id }}"
+                             selected> {{ $detention->division->title }} </option>
+                     @foreach( $division as $div)
+                        <option value="{{ $div->id }}"> {{ $div->title }} </option>
+                     @endforeach
+                  </select>
+                  @error('division')
+                  <sapn class="error">*{{ $message }}</sapn>
+                  @enderror
+               </label>
+            @else
+               <input type="text" name="division" id="division" value="{{ $detention->division_id }}"
+                      hidden>
+            @endif
 
             <label class="form__label" for="type"> Вид задержания:
                <select onchange="noteSelect(this)" class="form__select" name="type" id="typeSelect">
