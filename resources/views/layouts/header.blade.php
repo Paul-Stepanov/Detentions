@@ -5,7 +5,7 @@
    </div>
    @auth
       <a class="nav__menu-item-link nav__menu-item-link--username"
-         href="{{ route('login') }}">{{ Auth::user() -> name }}</a>
+         href="{{ route('profile.edit', auth()->user()) }}">{{ auth()->user() -> name }}</a>
       <nav class="header__nav nav">
          <ul class="nav__menu">
             <li class="nav__menu-item"><a href="{{ route('detention.index') }}"
@@ -22,7 +22,7 @@
                      регистрации ТС</a>
                </li>
                <li class="nav__menu-item">
-                  <a class="nav__menu-item-link" href="{{ route('register') }}">Регистрация пользователя</a>
+                  <a class="nav__menu-item-link" href="{{ route('profile.index') }}">Список пользователей</a>
                </li>
                <li class="nav__menu-item">
                   <a class="nav__menu-item-link" href="{{ route('editDetention.showChangedDetention') }}">Отредактированные

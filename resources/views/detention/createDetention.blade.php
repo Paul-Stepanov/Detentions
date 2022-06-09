@@ -26,7 +26,7 @@
             </label>
          </div>
          <div class="detentions__form-container">
-            @if(auth()->user()->role == 'admin')
+            @if(auth()->user()->role == 'admin' or auth()->user()->role == 'moderator')
                <label class="form__label" for="division"> Подразделение:
                   <select class="form__select" name="division">
                      @if(old('division'))
