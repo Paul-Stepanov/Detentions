@@ -63,8 +63,8 @@
          @if($userUpdate)
             <div class="detentions__show-card-body-block">
                <p class="detentions__show-card-body-title">Пользователь обновивший запись:</p>
-               <p class="detentions__show-card-body-item">{{ $userUpdate->name }}
-                  (СЭП: {{ $userUpdate->email }}@isset($userUpdate->phone), тел.:{{ $userUpdate->phone }})
+               <p class="detentions__show-card-body-item">{{ $userUpdate->name }},
+                  СЭП: {{ $userUpdate->email }}@isset($userUpdate->phone), тел.:{{ $userUpdate->phone }})
                   @endisset
 
                </p>
