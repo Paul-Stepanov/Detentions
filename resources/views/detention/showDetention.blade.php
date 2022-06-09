@@ -63,13 +63,17 @@
          @if($userUpdate)
             <div class="detentions__show-card-body-block">
                <p class="detentions__show-card-body-title">Пользователь обновивший запись:</p>
-               <p class="detentions__show-card-body-item">{{ $userUpdate->name }} (СЭП: {{ $userUpdate->email }})</p>
+               <p class="detentions__show-card-body-item">{{ $userUpdate->name }}
+                  (СЭП: {{ $userUpdate->email }}@isset($userUpdate->phone), тел.:{{ $userUpdate->phone }})
+                  @endisset
+
+               </p>
             </div>
-            @else
-               <div class="detentions__show-card-body-block">
-                  <p class="detentions__show-card-body-title">Пользователь обновивший запись:</p>
-                  <p class="detentions__show-card-body-item">Запись не редактировалась</p>
-               </div>
+         @else
+            <div class="detentions__show-card-body-block">
+               <p class="detentions__show-card-body-title">Пользователь обновивший запись:</p>
+               <p class="detentions__show-card-body-item">Запись не редактировалась</p>
+            </div>
          @endif
       </div>
       <button class="detentions__form-button button">
