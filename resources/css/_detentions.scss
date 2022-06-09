@@ -28,6 +28,9 @@
       white-space: normal;
       background-color: rgba(107, 114, 128, 0.3);
       font-size: 0.9vw;
+      &--users{
+         grid-template-columns: 3% 30% 10% 20% 10% 10% 10%;
+      }
    }
 
    // .detentions__card-item - стили одной ячейки таблицы

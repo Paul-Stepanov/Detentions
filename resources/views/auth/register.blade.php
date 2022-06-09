@@ -83,5 +83,9 @@
             {{ __('Регистрация') }}
          </button>
       </form>
+      <button class="button button--mt">
+         <a href="{{ url()->previous() }}"> Назад</a>
+      </button>
    </div>
+
 @endsection

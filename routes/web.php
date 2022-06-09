@@ -8,6 +8,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SortController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,13 @@ Route::prefix('report')->middleware('auth')->group(function () {
    Route::get('division', [ReportController::class, 'showDivisionReport'])->name('report.showDivisionReport');
    Route::post('division', [ReportController::class, 'createDivisionReport'])->name('report.createDivisionReport');
    Route::get('division/export', [ReportController::class, 'exportDivisionReport'])->name('report.divisionExport');
+});
+
+Route::prefix('profile')->middleware('auth')->group(function () {
+   Route::get('/', [UserController::class, 'index'])->name('profile.index');
+   Route::get('{user}/edit', [UserController::class, 'edit'])->name('profile.edit');
+   Route::patch('{user}', [UserController::class, 'update'])->name('profile.update');
+   Route::delete('{user}', [UserController::class, 'destroy'])->name('profile.destroy');
 });
 
 
