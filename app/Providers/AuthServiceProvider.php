@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
     */
    protected $policies = [
       // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+      'App\Models\User' => 'App\Policies\UserPolicy',
    ];
 
    /**
@@ -20,8 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     *
     * @return void
     */
-   public function boot()
-   {
+   public function boot() {
       $this->registerPolicies();
 
       //

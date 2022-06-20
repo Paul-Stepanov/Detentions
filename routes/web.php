@@ -65,10 +65,10 @@ Route::prefix('report')->middleware('auth')->group(function () {
 });
 
 Route::prefix('profile')->middleware('auth')->group(function () {
-   Route::get('/', [UserController::class, 'index'])->name('profile.index');
-   Route::get('{user}/edit', [UserController::class, 'edit'])->name('profile.edit');
-   Route::patch('{user}', [UserController::class, 'update'])->name('profile.update');
-   Route::delete('{user}', [UserController::class, 'destroy'])->name('profile.destroy');
+   Route::get('/', [UserController::class, 'index'])->name('profile.index')->middleware('can:viewAny, App\Models\User');
+   Route::get('{user}/edit', [UserController::class, 'edit'])->name('profile.edit')->middleware('can:view,user');
+   Route::patch('{user}', [UserController::class, 'update'])->name('profile.update')->middleware('can:update,user');
+   Route::delete('{user}', [UserController::class, 'destroy'])->name('profile.destroy')->middleware('can:delete,user');
 });
 
 

@@ -60,14 +60,15 @@
             {{ __('Сохранить изменения') }}
          </button>
          <br>
-         @if(auth()->user()->role == 'admin')
-            <form action="{{route('profile.destroy', $user)}}">
-               @csrf
-               @method('DELETE')
-               <button class="button button__delete-simple" type="submit">Удалить пользователя</button>
-            </form>
-         @endif
       </form>
+      @if(auth()->user()->role == 'admin')
+         <form action="{{route('profile.destroy', $user)}}" method="post">
+            @csrf
+            @method('DELETE')
+            <br>
+            <button class="button button__delete-simple" type="submit">Удалить пользователя</button>
+         </form>
+      @endif
       <button class="button button--mt">
          <a href="{{ url()->previous() }}"> Назад</a>
       </button>
