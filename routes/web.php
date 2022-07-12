@@ -62,6 +62,10 @@ Route::prefix('report')->middleware('auth')->group(function () {
    Route::get('division', [ReportController::class, 'showDivisionReport'])->name('report.showDivisionReport');
    Route::post('division', [ReportController::class, 'createDivisionReport'])->name('report.createDivisionReport');
    Route::get('division/export', [ReportController::class, 'exportDivisionReport'])->name('report.divisionExport');
+   Route::get('advanced/show', [ReportController::class, 'showAdvancedReport'])->name('report.showAdvancedReport');
+   Route::post('advanced/create', [ReportController::class, 'createAdvancedReport'])->name('report.createAdvancedReport');
+   Route::get('advanced/show_form', [ReportController::class, 'showFormAdvancedReport'])->name('report.showFormAdvancedReport');
+   Route::get('advanced/export', [ReportController::class, 'exportAdvancedReport'])->name('report.advancedExport');
 });
 
 Route::prefix('profile')->middleware('auth')->group(function () {

@@ -701,8 +701,15 @@ h6 {
   font-size: 14px;
   background-color: rgba(55, 150, 57, 0.5);
 }
+.alert__count {
+  padding: 5px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+}
 
 .report__menu-wrapper {
+  z-index: 50;
   position: relative;
   display: inline-block;
 }
@@ -716,6 +723,7 @@ h6 {
   transition: opacity 200ms linear;
 }
 .report__menu-link--hide {
+  z-index: 50;
   visibility: hidden;
   opacity: 0;
   border-radius: 20px;
@@ -858,6 +866,55 @@ h6 {
 }
 .report-division__btn {
   align-self: flex-start;
+}
+
+.advanced-report__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.advanced-report__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.advanced-report__card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
+}
+.advanced-report__card--date {
+  flex-direction: row;
+  align-items: baseline;
+}
+.advanced-report__card--date input {
+  margin: 0 5px;
+  border-radius: 3px;
+  padding: 5px;
+}
+.advanced-report__subtitle {
+  margin-right: 5px;
+  font-family: Comfortaa, serif;
+  color: #c1ab7a;
+  padding-bottom: 10px;
+}
+.advanced-report__card-items {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  height: 15vw;
+}
+.advanced-report__card-item-label {
+  line-height: 1.1;
+}
+.advanced-report__card-item {
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 5px;
 }
 
 .profiles__container {

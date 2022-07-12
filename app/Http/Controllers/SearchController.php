@@ -67,14 +67,15 @@ class SearchController extends Controller
       })->when($description, function ($query, $description) {
          return $query->where('description', 'like', "%$description%");
       })->when($dateCreateStart, function ($query, $dateCreateStart) {
-         return $query->where('created_at', '>=', $dateCreateStart);
+         return $query->whereDate('created_at', '>=', $dateCreateStart);
       })->when($dateCreateEnd, function ($query, $dateCreateEnd) {
-         return $query->where('created_at', '<=', $dateCreateEnd);
+         return $query->whereDate('created_at', '<=', $dateCreateEnd);
       })->when($dateUpdateStart, function ($query, $dateUpdateStart) {
-         return $query->where('updated_at', '>=', $dateUpdateStart);
+         return $query->whereDate('updated_at', '>=', $dateUpdateStart);
       })->when($dateUpdateEnd, function ($query, $dateUpdateEnd) {
-         return $query->where('updated_at', '<=', $dateUpdateEnd);
+         return $query->whereDate('updated_at', '<=', $dateUpdateEnd);
       })->get();
+
       Session::put('searchResult', $detention);
       return redirect()->route('search.showSearchResults');
    }

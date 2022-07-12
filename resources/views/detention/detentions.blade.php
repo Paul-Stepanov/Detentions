@@ -20,7 +20,8 @@
          <a class="report__menu-link report__menu-link--hide" id="divisionReport"
             href="{{ route('report.showDivisionReport') }}" hidden>по подразделениям</a>
       @endif
-      <a class="report__menu-link report__menu-link--hide" id="advancedReport" href="#">расширенный</a>
+      <a class="report__menu-link report__menu-link--hide" id="advancedReport"
+         href="{{ route('report.showFormAdvancedReport') }}">расширенный</a>
    </button>
 
    <div class="detentions">
@@ -217,6 +218,8 @@
       @endforeach
    </div>
    {{ $detention->links() }}
+   <p class="alert__count">Всего записей: {{ $detention->total()}}</p>
+
    <a class="button" href="{{ route('detention.export') }}">Экспорт в Excel</a>
 
    @if(auth()->user()->role == 'admin')

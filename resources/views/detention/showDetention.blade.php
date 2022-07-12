@@ -48,7 +48,8 @@
             <div class="detentions__show-card-body-block">
                <p class="detentions__show-card-body-title">Пользователь создавший запись:</p>
                <p class="detentions__show-card-body-item">{{ $detention->user->name }}
-                  (СЭП: {{ $detention->user->email }})</p>
+                  (СЭП: {{ $detention->user->email }}@isset($detention-> user->phone),
+                  тел.:{{$detention-> user->phone}} @endisset</p>
             </div>
          @else
             <div class="detentions__show-card-body-block">
