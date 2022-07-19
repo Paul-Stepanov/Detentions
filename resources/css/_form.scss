@@ -82,6 +82,33 @@
       }
    }
 
+   &__downloads {
+      display: flex;
+
+      &-item {
+         display: flex;
+         justify-content: space-between;
+      }
+
+      &-link {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width: 100%;
+         height: 100%;
+         padding: 10px;
+      }
+
+      &-img {
+         width: 100%;
+         height: 100%;
+      }
+
+      &-description {
+text-align: center;
+      }
+   }
+
 }
 
 

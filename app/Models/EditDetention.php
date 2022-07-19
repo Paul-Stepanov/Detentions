@@ -11,7 +11,6 @@ class EditDetention extends Model
 
    protected $dates = ['date'];
 
-
    protected $fillable = [
       'kusp',
       'date',

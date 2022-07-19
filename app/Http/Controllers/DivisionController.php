@@ -9,12 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class DivisionController extends Controller
 {
-   /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-   public function index() {
+   public function index() {//отображение списка всех подразделений
       $divisions = Division::all();
       return view('division.divisions', compact('divisions'));
    }

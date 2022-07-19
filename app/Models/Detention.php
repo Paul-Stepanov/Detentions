@@ -4,12 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
+/**
+ * @property mixed $user_update
+ */
 class Detention extends Model
 {
    use HasFactory;
 
-   protected $fillable = [
+   /*-----------------------------------------------------------------------------
+      Поля таблицы, которым разрешено массовое присвоение данных ↓
+   -----------------------------------------------------------------------------*/
+   protected
+      $fillable = [
       'kusp',
       'date',
       'division_id',
@@ -21,26 +31,50 @@ class Detention extends Model
       'user_update',
    ];
 
-   protected $dates = ['date'];
+   /*-----------------------------------------------------------------------------
+      Поле таблицы, которому присвоен формат: Дата ↓
+   -----------------------------------------------------------------------------*/
+   protected
+      $dates = ['date'];
 
-   public function division() {
+   /*-----------------------------------------------------------------------------
+      Связь один ко многим с моделью Подразделений ↓
+   -----------------------------------------------------------------------------*/
+
+   public
+   function division(): BelongsTo {
       return $this->belongsTo(Division::class);
    }
 
-   public function type() {
+   /*-----------------------------------------------------------------------------
+      Связь один ко многим с моделью Видов задержаний ↓
+   -----------------------------------------------------------------------------*/
+   public
+   function type(): BelongsTo {
       return $this->belongsTo(Type::class);
    }
 
-   public function note() {
+   /*-----------------------------------------------------------------------------
+      Связь один ко многим с моделью Оснований прекращений регистрации ↓
+   -----------------------------------------------------------------------------*/
+   public
+   function note(): BelongsTo {
       return $this->belongsTo(Note::class);
    }
 
-   public function edit_detentions() {
+   /*-----------------------------------------------------------------------------
+      Связь один ко многим с моделью Отредактированных задержаний ↓
+   -----------------------------------------------------------------------------*/
+   public
+   function edit_detentions(): HasMany {
       return $this->hasMany(EditDetention::class);
    }
 
-   public function user() {
+   /*-----------------------------------------------------------------------------
+      Связь один ко многим с моделью Пользователей ↓
+   -----------------------------------------------------------------------------*/
+   public
+   function user(): BelongsTo {
       return $this->belongsTo(User::class);
    }
-
 }

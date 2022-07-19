@@ -12,20 +12,21 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
+/* -----------------------------------------------------------------------------
+   Роуты авторизации и регистрации ↓
+--------------------------------------------------------------------------------*/
 Auth::routes();
+
+/* ------------------------------------------------------------------------------
+   Главная страница ↓
+---------------------------------------------------------------------------------*/
 Route::get('/', [DetentionController::class, 'index'])->middleware('auth');
 
+/* -------------------------------------------------------------------------------
+   Основные роуты по работе с задержаниями, в том числе экспорт и импорт в эксель,
+   а также подтверждением корректировки и удаления записей пользователями ↓
+---------------------------------------------------------------------------------*/
 Route::prefix('app')->middleware('auth')->group(function () {
    Route::resource('detention', DetentionController::class);
    Route::resource('division', DivisionController::class);
@@ -44,6 +45,9 @@ Route::prefix('app')->middleware('auth')->group(function () {
    Route::post('detentions/confirm/{editDetention}', [EditDetentionController::class, 'confirmChanges'])->name('editDetention.confirmChanges');
 });
 
+/* -----------------------------------------------------------------------------
+   Роуты поиска задержаний по различным критериям ↓
+----------------------------------------------------------------------------- */
 Route::prefix('search')->middleware('auth')->group(function () {
    Route::get('show_form', [SearchController::class, 'showForm'])->name('search.showForm');
    Route::post('create_results', [SearchController::class, 'createSearchResults'])->name('search.createSearchResults');
@@ -51,10 +55,16 @@ Route::prefix('search')->middleware('auth')->group(function () {
    Route::get('detentions/export', [SearchController::class, 'export'])->name('search.export');
 });
 
+/*-----------------------------------------------------------------------------
+   Роут сортировки задержаний на главной странице ↓
+ -----------------------------------------------------------------------------*/
 Route::prefix('sort')->group(function () {
    Route::get('column/{column}/sorted/{sorted}', [SortController::class, 'sortColumn'])->name('sort.sortColumn');
 });
 
+/*-----------------------------------------------------------------------------
+   Роуты формирования отчетов ↓
+-----------------------------------------------------------------------------*/
 Route::prefix('report')->middleware('auth')->group(function () {
    Route::get('type', [ReportController::class, 'showTypeReport'])->name('report.showTypeReport');
    Route::post('type', [ReportController::class, 'createTypeReport'])->name('report.createTypeReport');
@@ -68,6 +78,9 @@ Route::prefix('report')->middleware('auth')->group(function () {
    Route::get('advanced/export', [ReportController::class, 'exportAdvancedReport'])->name('report.advancedExport');
 });
 
+/*-----------------------------------------------------------------------------
+   Роуты просмотра и редактирования профиля пользователя ↓
+----------------------------------------------------------------------------- */
 Route::prefix('profile')->middleware('auth')->group(function () {
    Route::get('/', [UserController::class, 'index'])->name('profile.index')->middleware('can:viewAny, App\Models\User');
    Route::get('{user}/edit', [UserController::class, 'edit'])->name('profile.edit')->middleware('can:view,user');

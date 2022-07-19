@@ -5,49 +5,35 @@ namespace App\Http\Controllers;
 use App\Exports\DetentionsExport;
 use App\Imports\DetentionsImport;
 use App\Models\Detention;
-use App\Models\Note;
-use App\Models\Type;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class DetentionController extends Controller
 {
-   /**
-    * Display a listing of the resource.
-    *
-    * @return Response
-    */
-   public function index() {
+
+   public function index() {//отображение всех задержаний на главной странице в зависимости от роли пользователя
       if (auth()->user()->role == 'admin' or auth()->user()->role == 'moderator') {
          $detention = Detention::query()->orderByDesc('date')->paginate(10);
       } else {
          $detention = Detention::query()->where('division_id', auth()->user()->division_id)->orderByDesc('date')->paginate(10);
       }
+
       return view('detention.detentions', compact('detention'));
    }
 
-   /**
-    * Show the form for creating a new resource.
-    *
-    * @return Response
-    */
-   public function create() {
-      $type = Type::all();
-      $note = Note::all();
-      return view('detention.createDetention', compact('type', 'note'));
+   public function create() {//отображение страницы создания задержания
+
+      return view('detention.createDetention');
    }
 
-   /**
-    * Store a newly created resource in storage.
-    *
-    * @param Request $request
-    * @return Response
-    */
-   public function store(Request $request) {
-      $validationRules = [
+
+   public function store(Request $request): RedirectResponse {//сохранение записи задержания в базе данных
+
+      $validationRules = [//правила валидации данных
          'kusp' => 'nullable|numeric',
          'date' => 'required',
          'division' => 'required',
@@ -56,15 +42,15 @@ class DetentionController extends Controller
          'explanation' => 'max:50',
       ];
 
-      $errorMessage = [
+      $errorMessage = [//сообщения об ошибках при неудачной валидации введенных в форму данных
          'max' => 'Введите не более :max символов',
          'required' => 'Поле обязательно для заполнения',
          'numeric' => 'Доступен ввод только цифр',
       ];
 
-      $request->validate($validationRules, $errorMessage);
+      $request->validate($validationRules, $errorMessage);//валидация введенных в форму данных
 
-      Auth::user()->detentions()->create([
+      Auth::user()->detentions()->create([//массовое присвоение данных в базу, от имени авторизованного пользователя
          'kusp' => $request->input('kusp'),
          'date' => $request->input('date'),
          'division_id' => $request->input('division'),
@@ -74,42 +60,22 @@ class DetentionController extends Controller
          'note_id' => $request->input('note'),
       ]);
 
-      return redirect()->route('detention.index');
+      return redirect()->route('detention.index');// перенаправление на главную страницу
    }
 
-   /**
-    * Display the specified resource.
-    *
-    * @param Detention $detention
-    * @return Response
-    */
-   public function show(Detention $detention) {
-      $userUpdate = User::query()->find($detention->user_update);
+   public function show(Detention $detention) {//отображение карточки задержания
+      $userUpdate = User::query()->find($detention->user_update);// поиск пользователя обновившего запись, для последующей передачи его во view
       return view('detention.showDetention', compact('detention', 'userUpdate'));
    }
 
-   /**
-    * Show the form for editing the specified resource.
-    *
-    * @param Detention $detention
-    * @return Response
-    */
-   public function edit(Detention $detention) {
-      $type = Type::all();
-      $note = Note::all();
-      return view('detention.editDetention', compact('detention', 'type', 'note'));
+   public function edit(Detention $detention) {//отображение карточки редактирования записи задержания
+
+      return view('detention.editDetention', compact('detention'));
    }
 
-   /**
-    * Update the specified resource in storage.
-    *
-    * @param Request $request
-    * @param Detention $detention
-    * @return Response
-    */
-   public function update(Request $request, Detention $detention) {
+   public function update(Request $request, Detention $detention): RedirectResponse {//обновление записи задержания
 
-      $validationRules = [
+      $validationRules = [//правила валидации
          'kusp' => 'sometimes|nullable|numeric',
          'date' => 'required',
          'division' => 'required',
@@ -118,14 +84,15 @@ class DetentionController extends Controller
          'explanation' => 'max:50',
       ];
 
-      $errorMessage = [
+      $errorMessage = [//сообщения об ошибках валидации
          'max' => 'Введите не более :max символов',
          'required' => 'Поле обязательно для заполнения',
          'numeric' => 'Доступен ввод только цифр',
       ];
-      $request->validate($validationRules, $errorMessage);
 
-      $detention->update([
+      $request->validate($validationRules, $errorMessage);//валидация данных введенных в форму
+
+      $detention->update([//массовое обновление данных в базе
          'kusp' => $request->input('kusp'),
          'date' => $request->input('date'),
          'division_id' => $request->input('division'),
@@ -136,29 +103,20 @@ class DetentionController extends Controller
          'user_update' => auth()->user()->id,
       ]);
 
-      return redirect()->route('detention.index');
-
+      return redirect()->route('detention.index');//перенаправление на главную страницу
    }
 
-   /**
-    * Remove the specified resource from storage.
-    *
-    * @param Detention $detention
-    * @return Response
-    */
-   public function destroy(Detention $detention) {
+   public function destroy(Detention $detention): RedirectResponse {//удаление задержания из базы данных
       $detention->delete();
-      return redirect()->route('detention.index');
+      return redirect()->route('detention.index');//перенаправление на главную страницу
    }
 
-   public function export() {
+   public function export(): BinaryFileResponse {//експорт всех задержаний в эксель
       return Excel::download(new DetentionsExport, 'detention.xlsx');
    }
 
-   public function import() {
+   public function import(): RedirectResponse {//импорт задержаний из экселя, из файла detentionsImport.xlsx содержащегося в папке storage/app
       Excel::import(new DetentionsImport(), 'detentionsImport.xlsx');
-      return redirect()->route('detention.index');
+      return redirect()->route('detention.index');//перенаправление на главную страницу
    }
-
-
 }

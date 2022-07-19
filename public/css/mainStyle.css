@@ -289,6 +289,28 @@ h6 {
   align-items: center;
   max-width: 30%;
 }
+.form__downloads {
+  display: flex;
+}
+.form__downloads-item {
+  display: flex;
+  justify-content: space-between;
+}
+.form__downloads-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.form__downloads-img {
+  width: 100%;
+  height: 100%;
+}
+.form__downloads-description {
+  text-align: center;
+}
 
 .header {
   position: sticky;
@@ -706,6 +728,11 @@ h6 {
   text-align: center;
   color: white;
   font-size: 14px;
+}
+.alert__attention {
+  color: gold;
+  font-size: 16px;
+  text-align: center;
 }
 
 .report__menu-wrapper {

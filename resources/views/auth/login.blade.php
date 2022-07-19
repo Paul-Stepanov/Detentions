@@ -42,6 +42,31 @@
             {{ __('Вход') }}
          </button>
       </form>
+      <br>
+      <div class="form form__downloads">
+         <div class="form__downloads-item">
+            <p class="alert__attention">В случае некорректной работы сайта, обновите свой браузер, скачав любой из
+               предложенных ниже, с учетом разрядности Вашей операционной системы!</p>
+         </div>
 
+         <div class="form__downloads-item">
+            <a class="form__downloads-link" href="{{ asset('browsers/Firefox Setup 102.0.1(32).exe') }}">
+               <img class="form__downloads-img" src="{{ asset('img/icons/firefox.png') }}" alt="firefox32">
+               <p class="form__downloads-description">Mozilla FireFox 32x</p>
+            </a>
+            <a class="form__downloads-link" href="{{ asset('browsers/Firefox Setup 102.0.1(64).exe') }}">
+               <img class="form__downloads-img" src="{{ asset('img/icons/firefox.png') }}" alt="firefox64">
+               <p class="form__downloads-description">Mozilla FireFox 64x</p>
+            </a>
+            <a class="form__downloads-link" href="{{ asset('browsers/ChromeStandaloneSetup32.exe') }}">
+               <img class="form__downloads-img" src="{{ asset('img/icons/chrome.png') }}" alt="chrome32">
+               <p class="form__downloads-description">Google Chrome 32x</p>
+            </a>
+            <a class="form__downloads-link" href="{{ asset('browsers/ChromeStandaloneSetup64.exe') }}">
+               <img class="form__downloads-img" src="{{ asset('img/icons/chrome.png') }}" alt="chrome64">
+               <p class="form__downloads-description">Google Chrome 64x</p>
+            </a>
+         </div>
+      </div>
    </div>
 @endsection
