@@ -50,8 +50,7 @@
          <label for="phone" class="form__label">{{ __('Номер мобильного телефона') }}
             <input id="phone" type="tel" class="form__input-text"
                    name="phone" value="{{ old('phone') }}"
-                   required placeholder="Введите номер в формате 8-999-888-77-66"
-                   pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
+                   required placeholder="Введите номер в формате 89998887766">
             @error('phone')
             <span class="error" role="alert">*{{ $message }}</span>
             @enderror
