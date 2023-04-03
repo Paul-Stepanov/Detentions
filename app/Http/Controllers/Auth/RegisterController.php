@@ -36,7 +36,8 @@ class RegisterController extends Controller
     *
     * @return void
     */
-   public function __construct() {
+   public function __construct()
+   {
 //      $this->middleware('guest');
    }
 
@@ -46,7 +47,8 @@ class RegisterController extends Controller
     * @param array $data
     * @return \Illuminate\Contracts\Validation\Validator
     */
-   protected function validator(array $data) {
+   protected function validator(array $data)
+   {
       return Validator::make($data, [
          'name' => ['required', 'string', 'max:255'],
          'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -61,7 +63,8 @@ class RegisterController extends Controller
     * @param array $data
     * @return User
     */
-   protected function create(array $data) {
+   protected function create(array $data)
+   {
 
       $phone = str_replace('-', '', $data['phone']);
 
@@ -72,6 +75,7 @@ class RegisterController extends Controller
          'phone' => $phone,
          'email' => $data['email'],
          'password' => Hash::make($data['password']),
+//         'password' => $data['password'],
       ]);
    }
 }
